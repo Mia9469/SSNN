@@ -1,0 +1,3 @@
+python: can't open file '/Users/mia469/Documents/GitHub/SSNN/train.py': [Errno 2] No such file or directory
+
+ERROR conda.cli.main_run:execute(125): `conda run python train.py -c conf/cifar10/2_256_300E_t4.yml --model sdt --spike-mode lif --workers 2 --no-prefetcher` failed. (See above for error)

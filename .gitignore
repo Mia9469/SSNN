@@ -1,0 +1,23 @@
+# Model checkpoints and training outputs (large binary files)
+output/
+output_*/
+**/*.pth
+**/*.pth.tar
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Data (too large for git)
+data/
+
+# Logs (optional: remove if you want logs tracked)
+*.log
+
+# macOS
+.DS_Store
