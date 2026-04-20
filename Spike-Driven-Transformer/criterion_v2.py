@@ -51,6 +51,19 @@ def firing_rate_cv_loss(spike_tensors, lambda_cv=0.01):
     """
     Maximize the CV of output-layer firing rates.
 
+    ⚠️  GRADIENT WARNING — SNN dead-neuron trap:
+        CV = std(fr) / mean(fr).  The gradient of -CV w.r.t. below-average neurons
+        is positive (gradient descent pushes their fr toward 0).  Once a LIF neuron
+        stops firing the surrogate gradient ≈ 0 and the neuron can never recover.
+        This causes catastrophic collapse when training from scratch (mean_fr → 0,
+        CE → log(C), accuracy → random).
+
+        Safe use: fine-tuning from a converged checkpoint (neurons are already active).
+        Unsafe use: from-scratch training (use weight_cv_loss only instead).
+
+        To apply safely, pass spike tensors with `.detach()` so this term is a
+        monitoring metric rather than an active gradient signal.
+
     Args:
         spike_tensors: list of (T, B, ...) binary spike tensors from output LIF layers
                        (populated from the model's hook dict, key "head_lif")
@@ -119,6 +132,9 @@ def activation_cv_loss(spike_tensors, lambda_act_cv=0.005):
 
     Encourages neurons in intermediate layers to specialize: different neurons
     should fire at different rates, preventing redundant representations.
+
+    ⚠️  Same dead-neuron trap as firing_rate_cv_loss — see its docstring.
+        Pass detached spike tensors for safe use during from-scratch training.
 
     Args:
         spike_tensors: list of (T, B, ...) spike tensors from hidden LIF layers

@@ -4,7 +4,15 @@ scratch_train_compare.py
 Train Spike-Driven Transformer from scratch (random init) under two conditions:
 
   Baseline : TET loss only  (CE-based temporal ensemble)
-  CVmax    : TET loss + weight_cv_loss + firing_rate_cv_loss
+  CVmax    : TET loss + weight_cv_loss (weight heterogeneity regularisation)
+
+  NOTE — why not firing_rate_cv_loss in training?
+  CV = std(fr)/mean(fr).  Its gradient pushes below-average LIF neurons toward
+  fr=0.  Once inactive, the surrogate gradient ≈ 0 → dead-neuron trap →
+  catastrophic collapse (empirically: mean_fr→0, CE→2.30, acc→10%).
+  weight_cv_loss regularises the weight distribution directly (no LIF gate)
+  and is numerically stable.  Firing-rate CV is *measured* at eval as an
+  emergent consequence of weight diversity.
 
 Training follows the original paper config:
   AdamW, lr=3e-4, cosine LR, mixup=0.5, AutoAug, 100 epochs
@@ -65,8 +73,8 @@ MIN_LR          = 1e-5
 WARMUP_EP       = 20
 WEIGHT_DECAY    = 0.06
 
-LAMBDA_WEIGHT_CV = 0.001
-LAMBDA_FR_CV     = 0.005
+LAMBDA_WEIGHT_CV = 0.001   # weight diversity — safe gradient term
+LAMBDA_FR_CV     = 0.005   # used only for monitoring (detached), not gradient
 
 TET_MEANS = 1.0
 TET_LAMB  = 0.0
@@ -224,12 +232,15 @@ def train_one_epoch(model, optimizer, use_cvmax: bool) -> float:
             hook = {}
             outputs, hook = model(imgs, hook=hook)
             loss = tet_loss(outputs, labels, ce_fn)
+            # Only weight_cv_loss is used as a gradient term.
+            # firing_rate_cv_loss is NOT added to the training loss:
+            #   CV = std(fr)/mean(fr) — its gradient pushes below-average LIF neurons
+            #   toward fr=0. Once a LIF neuron stops firing, the surrogate gradient ≈ 0
+            #   and it can never recover (dead-neuron trap) → catastrophic collapse.
+            #   Safe approach: regularise the *weights* for diversity; firing-rate CV
+            #   is measured at eval time as an emergent property.
             loss = loss + criterion_v2.weight_cv_loss(
                 model, lambda_weight_cv=LAMBDA_WEIGHT_CV)
-            head_spikes = [v.float() for k, v in hook.items() if k == "head_lif"]
-            fr_cv = criterion_v2.firing_rate_cv_loss(head_spikes, lambda_cv=LAMBDA_FR_CV)
-            if isinstance(fr_cv, torch.Tensor):
-                loss = loss + fr_cv
         else:
             outputs, _ = model(imgs, hook=None)
             loss = tet_loss(outputs, labels, ce_fn)
