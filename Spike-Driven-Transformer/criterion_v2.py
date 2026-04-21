@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import numpy as np
 
 
 def TET_loss(outputs, labels, criterion, means, lamb):
@@ -126,6 +127,85 @@ def weight_cv_loss(model, lambda_weight_cv=0.001, layer_types=(nn.Conv2d, nn.Lin
     return -lambda_weight_cv * avg_cv
 
 
+def compute_weight_cv(model, layer_types=(nn.Conv2d, nn.Linear)) -> float:
+    """
+    Compute mean weight CV as a monitoring metric (no gradient).
+
+    Same formula as weight_cv_loss but returns a plain float.
+    Call inside torch.no_grad() for efficiency.
+    """
+    cvs = []
+    for module in model.modules():
+        if not isinstance(module, layer_types):
+            continue
+        if not hasattr(module, 'weight') or module.weight is None:
+            continue
+        w = module.weight
+        if w.dim() < 2:
+            continue
+        w_abs = w.view(w.shape[0], -1).abs().detach()
+        mean_abs = w_abs.mean(dim=1) + 1e-8
+        std_abs  = w_abs.std(dim=1, unbiased=False) + 1e-8
+        cvs.append((std_abs / mean_abs).mean().item())
+    return float(np.mean(cvs)) if cvs else 0.0
+
+
+def _temporal_cv(spike_tensors):
+    """
+    Internal helper: mean temporal CV of spike trains.
+
+    For each neuron n in each batch sample b:
+        cv_t[b,n] = std_t(spikes[:,b,n]) / mean_t(spikes[:,b,n])
+
+    Averaged over all neurons, samples, and tensors.
+    Returns a scalar tensor, or None if the list is empty or T < 2.
+    """
+    cv_values = []
+    for spikes in spike_tensors:
+        T = spikes.shape[0]
+        if T < 2:
+            continue
+        B = spikes.shape[1]
+        flat = spikes.float().view(T, B, -1)    # (T, B, N)
+        mean_t = flat.mean(dim=0)               # (B, N)
+        std_t  = flat.std(dim=0, unbiased=False) + 1e-8
+        cv_t   = std_t / (mean_t + 1e-8)        # (B, N)
+        cv_values.append(cv_t.mean())
+    if not cv_values:
+        return None
+    return torch.stack(cv_values).mean()
+
+
+def temporal_cv_loss(spike_tensors, lambda_temp_cv=0.005):
+    """
+    Maximize temporal CV of spike trains per neuron.
+
+    Encourages irregular / bursty firing within T timesteps.
+
+    ⚠️  T=4 is small — variance estimates are noisy.  Use a small lambda
+        and treat this as an auxiliary signal rather than a primary objective.
+    ⚠️  Same dead-neuron trap as firing_rate_cv_loss — avoid in from-scratch training.
+
+    Args:
+        spike_tensors: list of (T, B, ...) spike tensors
+        lambda_temp_cv: regularization strength
+
+    Returns:
+        scalar loss tensor, or 0.0 when list is empty
+    """
+    cv = _temporal_cv(spike_tensors)
+    if cv is None:
+        return 0.0
+    return -lambda_temp_cv * cv
+
+
+def compute_temporal_cv(spike_tensors) -> float:
+    """Compute mean temporal CV as a monitoring metric (no gradient)."""
+    with torch.no_grad():
+        cv = _temporal_cv(spike_tensors)
+    return 0.0 if cv is None else cv.item()
+
+
 def activation_cv_loss(spike_tensors, lambda_act_cv=0.005):
     """
     Maximize the CV of hidden-layer spike activations.
@@ -154,6 +234,7 @@ def combined_loss(outputs, labels, criterion, use_cv_loss=False,
                   lambda_cv=0.01, cv_weight=1.0, model=None,
                   use_weight_cv=False, lambda_weight_cv=0.001,
                   use_act_cv=False, lambda_act_cv=0.005,
+                  use_temporal_cv=False, lambda_temp_cv=0.005,
                   hook=None, **kwargs):
     """
     Combined loss: TET + (optional) firing-rate CV + weight CV + hidden-activation CV.
@@ -201,5 +282,12 @@ def combined_loss(outputs, labels, criterion, use_cv_loss=False,
         act_loss = activation_cv_loss(hidden_spikes, lambda_act_cv)
         if isinstance(act_loss, torch.Tensor):
             total_loss = total_loss + act_loss
+
+    # --- Temporal CV ---
+    if use_temporal_cv and hook is not None:
+        all_spikes = [v.float() for v in hook.values()]
+        temp_loss = temporal_cv_loss(all_spikes, lambda_temp_cv)
+        if isinstance(temp_loss, torch.Tensor):
+            total_loss = total_loss + temp_loss
 
     return total_loss
