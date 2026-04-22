@@ -79,6 +79,104 @@ def firing_rate_cv_loss(spike_tensors, lambda_cv=0.01):
     return -lambda_cv * cv
 
 
+def population_cv_loss(activations, lambda_cv=0.001):
+    """
+    Continuous-network analogue of `firing_rate_cv_loss`.
+
+    Each element of `activations` is a tensor of shape (B, ...) — the output of a
+    ReLU/BN/activation layer in a non-spiking network. No time dimension.
+
+    For each sample b we compute CV(|a|) across all units in the layer, then
+    average across samples and layers. The loss is -lambda_cv * <CV>, i.e. we
+    want to *maximise* CV.
+
+    Args:
+        activations: list of (B, ...) live (non-detached) activation tensors
+        lambda_cv:   regularisation strength
+
+    Returns:
+        scalar tensor, or 0.0 if the list is empty
+    """
+    cvs = []
+    for a in activations:
+        if a is None:
+            continue
+        B = a.shape[0]
+        flat = a.abs().view(B, -1)                    # (B, N), non-negative
+        mean_n = flat.mean(dim=1, keepdim=True) + 1e-8
+        std_n  = flat.std(dim=1, keepdim=True, unbiased=False) + 1e-8
+        cv = std_n / mean_n                           # (B, 1)
+        cvs.append(cv.mean())
+    if not cvs:
+        return 0.0
+    return -lambda_cv * torch.stack(cvs).mean()
+
+
+def compute_population_cv(activations) -> float:
+    """No-grad monitoring version of `population_cv_loss` (returns +CV, not -λ·CV)."""
+    with torch.no_grad():
+        cvs = []
+        for a in activations:
+            if a is None:
+                continue
+            B = a.shape[0]
+            flat = a.abs().view(B, -1)
+            mean_n = flat.mean(dim=1) + 1e-8
+            std_n  = flat.std(dim=1, unbiased=False) + 1e-8
+            cvs.append((std_n / mean_n).mean().item())
+    return float(np.mean(cvs)) if cvs else 0.0
+
+
+def lifetime_fr_cv_loss(spike_tensors, lambda_cv=0.0005):
+    """
+    Lifetime firing-rate CV: for each neuron, compute std/μ of its firing rate
+    across the batch dimension; average across neurons and layers.
+
+    This is the *lifetime* sparsity/variability counterpart of the population
+    CV used by `firing_rate_cv_loss`. In the Gibbs-manifold theory the two are
+    asymptotically related but can diverge in finite networks; in particular,
+    biophysical models show a ceiling on CV_L (Huang et al. 2025). Measuring it
+    in artificial LIF networks tests whether the same ceiling arises.
+
+    Same dead-neuron trap as population CV applies.
+
+    Args:
+        spike_tensors: list of (T, B, ...) spike tensors
+        lambda_cv:     regularisation strength
+
+    Returns:
+        scalar tensor, or 0.0 on empty input
+    """
+    cvs = []
+    for s in spike_tensors:
+        T = s.shape[0]
+        B = s.shape[1]
+        fr = s.float().sum(dim=0) / T                 # (B, ...), rate in [0,1]
+        flat = fr.view(B, -1)                         # (B, N)
+        mean_b = flat.mean(dim=0) + 1e-8              # per-neuron mean across batch
+        std_b  = flat.std(dim=0, unbiased=False) + 1e-8
+        cv_n   = std_b / mean_b                       # (N,)
+        cvs.append(cv_n.mean())
+    if not cvs:
+        return 0.0
+    return -lambda_cv * torch.stack(cvs).mean()
+
+
+def compute_lifetime_fr_cv(spike_tensors) -> float:
+    """No-grad monitoring metric matching lifetime_fr_cv_loss."""
+    with torch.no_grad():
+        cvs = []
+        for s in spike_tensors:
+            T = s.shape[0]
+            B = s.shape[1]
+            fr = s.float().sum(dim=0) / T
+            flat = fr.view(B, -1)
+            mean_b = flat.mean(dim=0) + 1e-8
+            std_b  = flat.std(dim=0, unbiased=False) + 1e-8
+            cvs.append((std_b / mean_b).mean().item())
+    return float(np.mean(cvs)) if cvs else 0.0
+
+
 def weight_cv_loss(model, lambda_weight_cv=0.001, layer_types=(nn.Conv2d, nn.Linear)):
     """
     Maximize the CV of weight magnitudes across filters / output neurons.
