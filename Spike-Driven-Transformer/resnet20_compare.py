@@ -23,6 +23,7 @@ Output format mirrors scratch_compare_results.json so the downstream cross-scale
 ICE-vs-CV plot can overlay both architectures without custom code.
 """
 
+import argparse
 import copy
 import json
 import math
@@ -72,8 +73,22 @@ ACT_CV_START     = WARMUP_EP    # mirror the SDT warmup gate for comparability
 
 N_SEEDS = 3                      # 3-seed average per condition
 
-RESULTS_FILE = os.path.join(REPO, "resnet20_compare_results.json")
-FIGURE_FILE  = os.path.join(REPO, "resnet20_compare.png")
+# ── Dataset CLI ────────────────────────────────────────────────────────────────
+_ap = argparse.ArgumentParser(add_help=False)
+_ap.add_argument("--dataset", choices=["cifar10", "cifar100"], default="cifar10")
+_ap.add_argument("--tag", default="",
+                 help="Optional suffix for output files, e.g. 'c100' → "
+                      "resnet20_compare_results_c100.json")
+_ap.add_argument("--force", action="store_true")
+_CLI, _ = _ap.parse_known_args()
+
+DATASET    = _CLI.dataset
+NUM_CLASSES = 100 if DATASET == "cifar100" else 10
+_TAG = f"_{_CLI.tag}" if _CLI.tag else ""
+
+RESULTS_FILE = os.path.join(REPO, f"resnet20_compare_results{_TAG}.json")
+FIGURE_FILE  = os.path.join(REPO, f"resnet20_compare{_TAG}.png")
+print(f"Dataset : {DATASET.upper()} ({NUM_CLASSES} classes)  |  out → {os.path.basename(RESULTS_FILE)}")
 
 # ── Ablation configs ──────────────────────────────────────────────────────────
 CONFIGS = [
@@ -187,10 +202,11 @@ train_tf = T.Compose([
 ])
 val_tf = T.Compose([T.ToTensor(), T.Normalize(MEAN, STD)])
 
-ds_train = torchvision.datasets.CIFAR10(os.path.join(REPO, "data"),
-                                        train=True, download=True, transform=train_tf)
-ds_val   = torchvision.datasets.CIFAR10(os.path.join(REPO, "data"),
-                                        train=False, download=True, transform=val_tf)
+_DSCLS = torchvision.datasets.CIFAR100 if DATASET == "cifar100" else torchvision.datasets.CIFAR10
+ds_train = _DSCLS(os.path.join(REPO, "data"),
+                  train=True,  download=True, transform=train_tf)
+ds_val   = _DSCLS(os.path.join(REPO, "data"),
+                  train=False, download=True, transform=val_tf)
 
 _gpu = torch.cuda.is_available()
 _nw  = 4 if _gpu else 2
@@ -295,7 +311,7 @@ def run_one_seed(seed: int):
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
 
-    base_model = ResNet20(num_classes=10).to(DEVICE)
+    base_model = ResNet20(num_classes=NUM_CLASSES).to(DEVICE)
     models = {c["name"]: copy.deepcopy(base_model) for c in CONFIGS}
     optimizers = {
         c["name"]: torch.optim.SGD(
@@ -411,7 +427,7 @@ def plot(data: dict):
     fig = plt.figure(figsize=(20, 12))
     fig.suptitle(
         f"ResNet-20 Ablation (continuous-activation control) — "
-        f"{N_EPOCHS} epochs × {n_seeds} seeds, CIFAR-10",
+        f"{N_EPOCHS} epochs × {n_seeds} seeds, {DATASET.upper()}",
         fontsize=13, fontweight="bold", y=1.00)
     gs = gridspec.GridSpec(2, 3, figure=fig, hspace=0.40, wspace=0.32)
 
