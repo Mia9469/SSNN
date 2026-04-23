@@ -21,7 +21,9 @@ Outputs
   spikformer_compare.png           — multi-panel figure matching the SDT one
 """
 
+import argparse
 import copy
+import glob
 import json
 import math
 import os
@@ -378,5 +380,87 @@ def run_with_cache():
         run()
 
 
+# ── Parallel-seed mode ───────────────────────────────────────────────────────
+# Usage for 3 parallel seeds on 3 GPUs:
+#   CUDA_VISIBLE_DEVICES=0 python spikformer_compare.py --seed 0 &
+#   CUDA_VISIBLE_DEVICES=1 python spikformer_compare.py --seed 1 &
+#   CUDA_VISIBLE_DEVICES=2 python spikformer_compare.py --seed 2 &
+#   wait
+#   python spikformer_compare.py --merge       # aggregate into main JSON + plot
+
+def _seed_file(seed):
+    return os.path.join(REPO, f"spikformer_seed{seed}.json")
+
+
+def run_single_seed(seed):
+    t0 = time.time()
+    hists, final = run_one_seed(seed)
+    dt = (time.time() - t0) / 60
+    out = {
+        "seed": seed,
+        "hists": hists,
+        "final": final,
+        "configs": [c["name"] for c in CONFIGS],
+        "labels":  {c["name"]: c["label"] for c in CONFIGS},
+        "n_epochs": N_EPOCHS,
+        "runtime_min": dt,
+    }
+    path = _seed_file(seed)
+    with open(path, "w") as f:
+        json.dump(out, f, indent=2)
+    print(f"\n[seed {seed}] done in {dt:.1f} min → {path}")
+
+
+def merge_seeds():
+    paths = sorted(glob.glob(os.path.join(REPO, "spikformer_seed*.json")))
+    if not paths:
+        print("No spikformer_seed*.json files to merge."); return
+    print(f"Merging {len(paths)} per-seed files:")
+    for p in paths:
+        print(f"  {os.path.basename(p)}")
+
+    per_seed = [json.load(open(p)) for p in paths]
+    all_hists = [s["hists"] for s in per_seed]
+    all_final = [s["final"] for s in per_seed]
+
+    avg_hists = {c["name"]: {"epoch": all_hists[0][c["name"]]["epoch"]} for c in CONFIGS}
+    for c in CONFIGS:
+        for k in METRIC_KEYS:
+            M = np.array([h[c["name"]][k] for h in all_hists])
+            avg_hists[c["name"]][k] = M.mean(axis=0).tolist()
+            avg_hists[c["name"]][k+"_std"] = M.std(axis=0).tolist()
+
+    data = {"hists": avg_hists,
+            "configs": [c["name"] for c in CONFIGS],
+            "labels":  {c["name"]: c["label"] for c in CONFIGS},
+            "n_seeds": len(per_seed)}
+    for c in CONFIGS:
+        for field in ("layer_cv", "layer_mfr", "layer_lcv"):
+            keys = sorted(all_final[0][c["name"]][field].keys())
+            data[f"final_{c['name']}_{field}"] = {
+                k: float(np.mean([f[c["name"]][field][k] for f in all_final])) for k in keys}
+        data[f"final_{c['name']}_summary"] = {
+            k: float(np.mean([f[c["name"]][k] for f in all_final])) for k in METRIC_KEYS}
+
+    with open(RESULTS_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"\nMerged → {RESULTS_FILE} (n_seeds={len(per_seed)})")
+    plot(data)
+
+
 if __name__ == "__main__":
-    run_with_cache()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seed", type=int, default=None,
+                    help="Run exactly one seed and write spikformer_seed<N>.json")
+    ap.add_argument("--merge", action="store_true",
+                    help="Merge all per-seed JSONs into the main results file + plot")
+    ap.add_argument("--force", action="store_true",
+                    help="Bypass cached spikformer_compare_results.json in default mode")
+    args, _ = ap.parse_known_args()
+
+    if args.merge:
+        merge_seeds()
+    elif args.seed is not None:
+        run_single_seed(args.seed)
+    else:
+        run_with_cache()
