@@ -70,7 +70,11 @@ WARMUP_EP       = 20
 WEIGHT_DECAY    = 0.06
 
 LAMBDA_WEIGHT_CV = 0.001
-LAMBDA_POP_CV    = 0.0005
+# Spikformer's PopFR-CV knee is ~5× tighter than SDT's (see
+# lambda_sweep_spikformer_results.json): at λ=5e-4 Spikformer partially
+# collapses (Acc~70%), while λ=1e-4 sits in the safe regime and gives
+# the largest clean ICE uplift (+56% over baseline at Acc=81.5%).
+LAMBDA_POP_CV    = 0.0001
 POP_CV_START     = WARMUP_EP
 
 N_SEEDS = 1                   # set to 3 if GPU-hours allow; 1 is enough for sign-check
@@ -401,7 +405,7 @@ def run_with_cache():
 #   python spikformer_compare.py --merge       # aggregate into main JSON + plot
 
 def _seed_file(seed):
-    return os.path.join(REPO, f"spikformer_seed{seed}.json")
+    return os.path.join(REPO, f"spikformer_seed{seed}{_TAG}.json")
 
 
 def run_single_seed(seed):
@@ -424,7 +428,11 @@ def run_single_seed(seed):
 
 
 def merge_seeds():
-    paths = sorted(glob.glob(os.path.join(REPO, "spikformer_seed*.json")))
+    paths = sorted(glob.glob(os.path.join(REPO, f"spikformer_seed*{_TAG}.json")))
+    # Exclude cross-tag files (e.g., when TAG="" don't sweep in _c100 files)
+    if not _TAG:
+        paths = [p for p in paths if "_c100" not in os.path.basename(p)
+                 and "_cifar100" not in os.path.basename(p)]
     if not paths:
         print("No spikformer_seed*.json files to merge."); return
     print(f"Merging {len(paths)} per-seed files:")

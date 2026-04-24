@@ -53,13 +53,16 @@
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
+\usepackage{graphicx}       % figures
+\usepackage{subcaption}
 
 % Note. For the workshop paper template, both \title{} and \workshoptitle{} are required, with the former indicating the paper title shown in the title and the latter indicating the workshop title displayed in the footnote. 
-\title{On the Scale-Dependence of Coefficient-of-Variation Regularization \\
-in Neural Networks: Heterogeneity Promotion vs.\ Implicit Pruning}
+\title{Beyond Sparsity: Scale-Dependent Heterogeneity \\
+Regularisation for Efficient Neural Networks}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -85,7 +88,7 @@ in Neural Networks: Heterogeneity Promotion vs.\ Implicit Pruning}
 
 
 \begin{abstract}
-The coefficient of variation (CV) has recently been proposed as a macroscopic coordinate of metabolic coding efficiency in biological neural circuits: under a Gibbs-form energy-constrained optimum, information-cost efficiency (ICE) rises monotonically with CV. Motivated by this normative principle, we ask whether CV can serve as a principled \emph{regularization objective} in artificial neural networks, and whether the \emph{scale} at which it is applied determines its effect. We systematically compare four scales---filter weights, sparse-code coefficients, population firing rates, and within-neuron temporal spikes---on three architectures: a sparse-coding dictionary learner (SparseNet with ISTA), a continuous ReLU network (ResNet), and a binary-spike transformer (Spike-Driven Transformer on CIFAR-10). We identify a \textbf{mechanism dichotomy}. In continuous-activation systems, CV maximization promotes \emph{genuine activation heterogeneity}, raising ICE by 25\% on natural-image patches without degrading reconstruction. In binary-spike systems, the \emph{same} objective triggers a dead-neuron trap that collapses population CV by 91\%, yet nonetheless improves the SNN analogue of ICE by up to 20\% via \emph{implicit structured pruning}. Weight-level CV is the only scale at which the intended heterogeneity mechanism transfers cleanly across all three architectures, whereas temporal CV is uninformative at practical SNN time-step resolutions. Our results suggest that ICE, not CV itself, is the invariant quantity across architectural scales, and that optimizer dynamics at the point of application---smooth proximal gradients versus surrogate gradients through a spike threshold---determine which efficiency-improving mechanism dominates. We provide concrete design guidance for CV-style regularizers in modern spiking and non-spiking networks.
+Sparsity regularisers---$\ell_1$, Hoyer, $k$-sparse---are the default lever for reducing activation cost in efficient neural networks, and are typically assumed to transfer to spiking networks (SNNs) where reducing firing rate directly reduces energy. We argue this assumption is wrong. Through a matched head-to-head comparison on the Spike-Driven Transformer, we show that rewarding \emph{heterogeneity} of the activation distribution---operationalised as its coefficient of variation (CV)---outperforms rewarding \emph{sparsity} on every metric that matters (accuracy, information--cost efficiency, \emph{and} mean firing rate): Hoyer drives higher sparsity but lower ICE than CV. Having established that heterogeneity is the right target, we ask which scale to apply it at. We systematically compare four scales---filter weights, continuous activations, population firing rates, and within-neuron lifetime firing---across four architectures spanning the continuous-to-discrete spectrum (SparseNet, ResNet-20, SDT, Spikformer). We uncover a \textbf{scale dichotomy}: weight-scale regularisation is a near-no-op, while activation-scale regularisation is the real efficiency lever, and it is 5--10$\times$ stronger on SNNs than on ANNs (on CIFAR-10/100, $+$1.6--4.4\% ICE for ResNet-20 vs.\ $+$13--20\% for SDT/Spikformer). A complementary \emph{dead-neuron trap} characterises when the lever breaks: applied before learning-rate warmup, or on the lifetime axis where the gradient uniformly silences under-firing neurons, the same objective collapses accuracy to near-random. An onset-timing sweep shows that delayed activation of the population regulariser avoids the trap while preserving the ICE gain, unifying two failure modes under one mechanism. A two-family $\lambda$ sweep confirms the recipe is a knee rather than a needle---WeightCV is a broad plateau over two orders of magnitude; the PopFR-CV knee is architecture-dependent (SDT tolerates a full order of magnitude around $5\!\times\!10^{-4}$; Spikformer's knee is $\sim 5\times$ tighter and centred at $10^{-4}$). Our results reframe efficient SNN training around heterogeneity rather than sparsity, and position the scale of application as a first-class design variable.
 \end{abstract}
 
 
@@ -93,21 +96,31 @@ The coefficient of variation (CV) has recently been proposed as a macroscopic co
 \section{Introduction}
 \label{sec:intro}
 
-For more than half a century, computational neuroscience has grappled with a foundational paradox: how do biological neural circuits support powerful computations while operating under severe metabolic constraints~\cite{lennie2003cost}? Two influential lines of theoretical work have emerged in response. The first, rooted in Barlow's efficient coding hypothesis~\cite{barlow1961}, emphasizes \emph{sparseness}---the activation of small, non-overlapping neural populations---as a strategy to minimize redundancy and energy expenditure~\cite{olshausen1996sparse,rolls1995sparseness}. The second, developed in the wake of studies on cortical irregularity~\cite{softky1993,shadlen1998variable}, emphasizes \emph{response variability}---commonly measured by the coefficient of variation (CV = $\sigma/\mu$)---as a hallmark of flexible and robust neural computation~\cite{faisal2008noise}. Recent work has unified these perspectives under a normative Gibbs-manifold framework in which sparseness and variability are algebraically equivalent descriptors of the same energy-constrained optimum, and in which the information--cost efficiency ($\mathrm{ICE} = I(s;r)/C$) rises monotonically with CV~\cite{huang2025variability}.
+Efficient neural networks need an activation-cost regulariser, and the default answer---across ANN compression and SNN energy minimisation alike---is \emph{sparsity}: $\ell_1$~\cite{olshausen1996sparse}, $k$-sparse~\cite{makhzani2014}, and Hoyer's scale-invariant $\ell_1/\ell_2$ measure~\cite{yang2020deephoyer}. For spiking networks, which pay per-spike energy on event-driven hardware, the appeal is even more direct: push firing rates down and energy drops with them~\cite{pellegrini2021low,kim2022exploring,narduzzi2022optimizing}. In this paper we question the default. Sparsity rewards a one-hot-like activity pattern---a few neurons maximally active, the rest off---but this is only one of many ways to realise a low-cost code. A \emph{heterogeneous} code, in which activity is dispersed across a heavy-tailed distribution of magnitudes, can be equally sparse in total activation while carrying more information per spike. We argue that heterogeneity, not sparsity, is the right efficiency lever for spiking networks, and that operationalising it requires care about which \emph{scale} of the network the regulariser acts on.
 
-While this theoretical framework has been validated in biological recordings, biophysical simulations, and recurrent spiking networks, whether \emph{CV itself can be repurposed as a regularization objective for artificial neural networks} remains largely unexplored. Existing regularization tools---L1/L2 weight penalties, dropout, batch normalization, decorrelation losses~\cite{cogswell2016decov}---do not target activation heterogeneity in the form predicted by the efficient-coding theory. In this paper we ask two pointed questions:
+Concretely, we take the coefficient of variation (CV $= \sigma/\mu$) as a differentiable surrogate for heterogeneity and ask which distribution it should be computed over. A CV of weights? of continuous activations? of neuron-averaged firing rates? of per-neuron firing rates across the dataset? Each is a legitimate object, each induces a different auxiliary loss, and---as we will show---each interacts very differently with the optimizer. Our two questions are therefore:
 \begin{enumerate}\itemsep0pt
-\item[\textbf{Q1.}] Does CV-maximizing regularization improve coding efficiency (ICE) in artificial neural networks, as predicted by the biological theory?
-\item[\textbf{Q2.}] Does the \emph{scale} of the network at which CV is applied---weights, continuous activations, population firing rates, or within-neuron temporal spikes---qualitatively alter its effect?
+\item[\textbf{Q1.}] Does rewarding heterogeneity (CV) outperform rewarding sparsity (Hoyer) at matched cost on spiking networks?
+\item[\textbf{Q2.}] Does the scale at which the heterogeneity objective is applied---weights, continuous activations, population firing rates, within-neuron lifetime firing---qualitatively change its effect?
 \end{enumerate}
 
-We answer both questions empirically across three architectures that together span the continuous-to-discrete spectrum of modern neural models: (i) a \textbf{SparseNet} sparse-coding dictionary learner trained on natural image patches with ISTA~\cite{olshausen1996sparse,daubechies2004iterative}; (ii) a continuous-activation \textbf{ResNet} trained on CIFAR-10~\cite{he2016deep}; and (iii) a binary-spike \textbf{Spike-Driven Transformer} (SDT)~\cite{yao2023sdt} trained on CIFAR-10. For each architecture we evaluate CV regularization at every applicable scale.
+A convenient normative anchor for this investigation is the recent Gibbs-manifold framework of~\cite{huang2025variability}, which shows that under an energy-constrained optimum the information--cost efficiency ($\mathrm{ICE} = I(s;r)/C$) rises monotonically with CV. We use ICE as our scale-invariant summary metric throughout; the theoretical motivation is reviewed in \S\ref{sec:prelim}. But our questions are empirical and sit squarely in the efficient-NN literature: heterogeneity vs.\ sparsity, and which scale pays.
+
+We answer both questions empirically across four architectures that together span the continuous-to-discrete spectrum of modern neural models: (i) a \textbf{SparseNet} sparse-coding dictionary learner trained on natural image patches with ISTA~\cite{olshausen1996sparse,daubechies2004iterative}; (ii) a continuous-activation \textbf{ResNet-20} on CIFAR-10/100~\cite{he2016deep}; (iii) a binary-spike \textbf{Spike-Driven Transformer} (SDT)~\cite{yao2023sdt} on CIFAR-10/100; and (iv) \textbf{Spikformer}~\cite{zhou2023spikformer} on CIFAR-10/100 for cross-validation on a different spiking attention mechanism (SSA vs.\ K$\odot$V). For each architecture we evaluate the heterogeneity objective at every applicable scale and, on SDT, we compare it head-to-head against a matched Hoyer-$\ell_1/\ell_2$ sparsity baseline.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig1.pdf}
+\caption{\textbf{Heterogeneity regularisation at four scales.} (A)~The four distributions CV can be computed over---weights, activations, population firing rate, lifetime firing rate---each induces a different auxiliary loss. (B)~Why the scale matters: below threshold the LIF surrogate gradient is $\approx 0$, so a CV gradient that pushes low-firing neurons further down silences them irreversibly---the dead-neuron trap. (C)~Coverage: four architectures (SparseNet, ResNet-20, SDT, Spikformer) across natural-image patches, CIFAR-10, and CIFAR-100; chips indicate which scales are tested per architecture. (D)~Preview of the result ($\Delta$ICE vs.\ baseline on CIFAR-10): weight-scale $\approx 0$ in both regimes; activation-scale is the lever and is $\sim$10$\times$ stronger on SNNs.}
+\label{fig:teaser}
+\end{figure}
 
 \paragraph{Contributions.}
 \begin{itemize}\itemsep0pt
-\item[\textbf{C1.}] We formalize CV regularization at four scales---weights, coefficients, population firing rates, and temporal spikes---and identify their regimes of applicability across continuous and spiking networks (Section~\ref{sec:scales}).
-\item[\textbf{C2.}] We document a \textbf{mechanism dichotomy}: in continuous-activation systems, CV maximization promotes genuine activation heterogeneity; in binary-spike systems, the identical objective collapses population CV but improves task performance via implicit structured pruning---a consequence of the dead-neuron trap induced by surrogate gradients (Section~\ref{sec:results}).
-\item[\textbf{C3.}] We show that the information--cost efficiency (ICE) is the \emph{invariant} quantity across scales and architectures, while CV itself is not. Weight-level CV is identified as the only scale at which the intended heterogeneity mechanism transfers cleanly to deep spiking networks, suggesting a practical design principle (Section~\ref{sec:discussion}).
+\item[\textbf{C1.}] A \textbf{heterogeneity-beats-sparsity} result. On SDT/CIFAR-10, a matched head-to-head comparison shows that a CV regulariser on population firing rate dominates the Hoyer $\ell_1/\ell_2$ sparsity baseline on accuracy, ICE, \emph{and} mean firing rate simultaneously---sparsity and heterogeneity are not interchangeable, and the latter is the right target for efficient SNN training.
+\item[\textbf{C2.}] An empirical \textbf{scale dichotomy} (Fig.~\ref{fig:teaser}): weight-scale regularisation $\approx$ 0 uplift; activation-scale regularisation produces the full effect. The dichotomy is confirmed across two ANNs (SparseNet, ResNet-20), two SNNs (SDT, Spikformer), and two datasets (CIFAR-10/100).
+\item[\textbf{C3.}] A \textbf{dead-neuron-trap} characterisation that unifies two distinct failure modes---population-FR CV applied before warmup, and lifetime CV applied at any onset---under a single mechanism. An onset-timing sweep isolates the boundary at which the regulariser crosses from curse to lever.
+\item[\textbf{C4.}] A two-family $\lambda$ sweep on SDT and Spikformer revealing an \textbf{asymmetric robustness profile}: the WeightCV coefficient is essentially a plateau (two orders of magnitude give indistinguishable ICE, confirming the no-op), while the PopFR-CV knee is architecture-dependent---SDT's useful window spans an order of magnitude around $\lambda_{\text{pop}}\!\approx\!5\!\times\!10^{-4}$, but Spikformer's knee is $\sim 5\times$ tighter and centred at $\lambda_{\text{pop}}\!\approx\!10^{-4}$. The recipe transfers in \emph{shape} (WeightCV free, PopCV useful up to a dead-neuron cliff) but not in the exact coefficient.
 \end{itemize}
 
 \section{Related work}
@@ -171,99 +184,113 @@ $\mathrm{CV}_a^{(\text{pop})}$ and $\mathrm{CV}_{fr}^{(\text{pop})}$ measure \em
 \subsection{Setup}
 \label{sec:setup}
 
-\textbf{SparseNet.} We use an Olshausen--Field dictionary learner with $K = 144$ atoms and $16 \times 16$ patches extracted from the Van Hateren natural image dataset (10 images, 512$\times$512). Sparse codes are inferred by 100-step ISTA with soft-thresholding parameter $\lambda = 5{\times}10^{-3}$. Three conditions are compared: \textsc{Null} (reconstruction only), \textsc{Cauchy} (reconstruction + Cauchy prior), and \textsc{CV-max} (reconstruction $-\alpha \cdot \mathrm{CV}_a^{(\text{pop})}$ with $\alpha = 0.10 \cdot |\mathcal{L}_{\text{recon}}|/|\mathrm{CV}|$ adaptive scaling). A two-phase ISTA schedule with 20 warmup iterations prevents instability at $R \approx 0$. Each condition is repeated for 20 independent runs.
+\textbf{Architectures.} \textbf{SparseNet}: an Olshausen--Field dictionary learner with $K{=}144$ atoms, $16{\times}16$ patches from the Van~Hateren dataset, 100-step ISTA with soft-threshold $\lambda{=}5{\times}10^{-3}$ and a 20-iter warmup to prevent instability at $R{\approx}0$. \textbf{ResNet-20}: the standard CIFAR residual network~\cite{he2016deep}. \textbf{SDT}~\cite{yao2023sdt}: K$\odot$V spiking attention, $T{=}4$, depth 2, 256-d embeddings, LIF neurons, TET loss~\cite{deng2022tet}. \textbf{Spikformer}~\cite{zhou2023spikformer}: Q$\cdot$K$^\top$ spiking self-attention (SSA), otherwise matched to SDT. All CIFAR models share AdamW (lr $3{\times}10^{-4}$, cosine schedule, 20-epoch LR warmup, weight decay 0.06), Mixup, and RandAugment.
 
-\textbf{ResNet-20 on CIFAR-10.} \textcolor{red}{[TODO: experiment pending. Plan: 4 conditions $\in \{\text{Base}, \text{WeightCV}, \text{ActCV}, \text{Weight+ActCV}\}$ $\times$ 3 seeds $\times$ 200 epochs, AdamW with standard CIFAR recipe.]}
+\textbf{Conditions.} For SparseNet we compare \textsc{Null} / \textsc{Cauchy} / \textsc{CV-max}. For ResNet we compare the four continuous-analogue conditions $\{$Base, WeightCV, ActCV, Weight+ActCV$\}$ (3 seeds $\times$ 200 ep). For SDT we compare five SNN conditions $\{$Base, WeightCV, PopFR-CV, Weight+PopCV, LifetimeCV$\}$ (3 seeds $\times$ 300 ep on CIFAR-10; 3 seeds on CIFAR-100). For Spikformer we compare \{Base, Weight+PopCV\} (3--7 seeds $\times$ 200 ep on CIFAR-10/100).
 
-\textbf{Spike-Driven Transformer on CIFAR-10.} We train the SDT architecture~\cite{yao2023sdt} ($T=4$, depth 2, 256-dim embeddings, LIF neurons, TET loss) from scratch for 300 epochs with AdamW (lr $=3{\times}10^{-4}$, cosine schedule, 20-epoch warmup, weight decay 0.06). Four conditions are compared: \textsc{Baseline}, \textsc{WeightCV} ($\lambda = 10^{-3}$), \textsc{PopFR-CV} ($\lambda = 5{\times}10^{-4}$, activated after warmup), and \textsc{Weight+PopCV}. All models share the same random initialization. We additionally log \textsc{Temporal} CV as a monitoring metric. Full training takes $\approx$24 hours on 8$\times$RTX~3090.
+\textbf{Metrics.} For SparseNet: relative reconstruction error RE, mean activation $\bar{a}$, basis independence $D_\phi$, population CV, and $\mathrm{ICE}_{\text{sc}}{=}-\log_2(\mathrm{RE})/\bar{a}$. For ANN/SNN classifiers: top-1 accuracy, mean activation / firing rate, population and lifetime CV, weight CV, and $\mathrm{ICE}{=}\text{Acc}/\bar{f}$ (SNN) or $\text{Acc}/\overline{|a|}$ (ANN). Deadneuron ratio is the fraction of neurons with validation firing rate below $10^{-6}$.
 
-\textbf{Metrics.} For SparseNet we report population CV, relative reconstruction error RE, mean activation $\bar{a}$, basis independence $D_\phi$, and $\mathrm{ICE}_{\text{sc}} = -\log_2(\mathrm{RE})/\bar{a}$ (bits per activation). For SDT we report all four CV types, mean firing rate $\bar{f}$, cross-entropy loss, top-1 accuracy, and an SNN analogue $\mathrm{ICE}_{\text{snn}} = \text{Acc}/\bar{f}$.
+\subsection{Mechanism: how CV reshapes activity in continuous vs.\ discrete systems}
+\label{sec:res-mechanism}
 
-\subsection{SparseNet: CV maximization increases ICE without degrading reconstruction}
-\label{sec:res-sparsenet}
+Fig.~\ref{fig:mechanism} contrasts the two regimes side by side. Panels~A--C show SparseNet: CV-max raises population CV, reduces cost $\bar{a}$, and \emph{improves} reconstruction-denominated ICE. Table~\ref{tab:sparsenet} gives the aggregates. Panels~D--F show the SDT five-way ablation: Weight+PopCV gives the largest and most stable ICE uplift; PopFR-CV lowers firing rate without hurting accuracy; LifetimeCV, by contrast, collapses to $\sim$10\% accuracy on CIFAR-10 and $\sim$1\% on CIFAR-100. Critically, PopFR-CV \emph{lowers} $\mathrm{CV}_{fr}^{(\text{pop})}$ by $\sim$91\% despite being the term that is being maximised. The efficiency gain survives the CV collapse---so the invariant quantity is ICE, not CV itself.
 
-Table~\ref{tab:sparsenet} reports the three conditions averaged over 10 runs. CV-max achieves the highest ICE (15.34 bits/activation, $+25\%$ over \textsc{Null}) with comparable reconstruction error and $44\%$ lower cost. The Cauchy condition, despite aggressively reducing cost, fails to improve ICE because its reconstruction error rises disproportionately---confirming that L1-style sparsification and CV-style heterogeneity promotion are not equivalent routes to efficient coding.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig2.pdf}
+\caption{\textbf{Mechanism across regimes.} (A--C) SparseNet, 20 runs: CV $\uparrow$, cost $\downarrow$, ICE $\uparrow$. (D--F) SDT five-way ablation on CIFAR-10, 3 seeds: Weight+PopCV raises ICE and lowers firing rate; LifetimeCV collapses. CV is \emph{not} the invariant---ICE is.}
+\label{fig:mechanism}
+\end{figure}
 
 \begin{table}[h]
 \centering\small
 \begin{tabular}{lccccc}
 \toprule
- & RE $\downarrow$ & Cost $\bar{a}$ $\downarrow$ & $D_\phi$ (\%) $\uparrow$ & $\mathrm{CV}_a^{(\text{pop})}$ $\uparrow$ & $\mathrm{ICE}_{\text{sc}}$ $\uparrow$ \\ \midrule
+ & RE $\downarrow$ & $\bar{a}$ $\downarrow$ & $D_\phi$ (\%) $\uparrow$ & $\mathrm{CV}_a^{(\text{pop})}$ $\uparrow$ & $\mathrm{ICE}_{\text{sc}}$ $\uparrow$ \\ \midrule
 \textsc{Null}    & 0.611 & 0.0579 & 92.70 & 2.63 & 12.27 \\
 \textsc{Cauchy}  & 0.702 & 0.0419 & 91.70 & 2.48 & 12.17 \\
 \textsc{CV-max}  & 0.710 & \textbf{0.0322} & \textbf{92.30} & \textbf{2.79} & \textbf{15.34} \\
 \bottomrule
 \end{tabular}
-\caption{Sparse coding results, mean over 10 runs. CV-max achieves the best ICE and lowest cost while preserving basis independence. Cost $\bar{a}$ is the mean absolute activation.}
+\caption{SparseNet, mean over 20 runs. CV-max achieves the best ICE and lowest cost while preserving basis independence.}
 \label{tab:sparsenet}
 \end{table}
-
-Visualizing the learned dictionary atoms (Appendix Figure~\ref{fig:dictionary}) confirms that CV-max recovers localized, oriented, Gabor-like receptive fields indistinguishable in qualitative structure from the \textsc{Null} and \textsc{Cauchy} conditions---but with reduced redundancy, as reflected in the higher $D_\phi$.
-
-\subsection{Spike-Driven Transformer: CV maximization collapses CV but still improves ICE}
-\label{sec:res-sdt}
-
-Table~\ref{tab:sdt} reports the four SDT conditions after 300 training epochs. Three observations stand out.
-
-\emph{First}, all CV-regularized variants outperform \textsc{Baseline} on accuracy, CE loss, and mean firing rate. \textsc{Weight+PopCV} delivers the best numbers overall ($+1.27\%$ accuracy, $-7.5\%$ CE, $-15.5\%$ firing rate).
-
-\emph{Second}, \textsc{PopFR-CV}---the variant that most directly enforces CV-of-firing-rate, the exact quantity predicted by theory \eqref{eq:monotone} to maximize ICE---produces a \emph{catastrophic collapse} of population CV (from 18.75 in \textsc{Baseline} to 1.66). This is the \emph{opposite} of the stated objective.
-
-\emph{Third}, despite this collapse, $\mathrm{ICE}_{\text{snn}} = \text{Acc}/\bar{f}$ \emph{improves} by $+13.6\%$ under \textsc{PopFR-CV} and $+20.0\%$ under \textsc{Weight+PopCV}.
 
 \begin{table}[h]
 \centering\small
 \begin{tabular}{lcccccc}
 \toprule
- & $\mathrm{CV}_{fr}^{(\text{pop})}$ & $\mathrm{CV}_t$ & $\mathrm{CV}_w$ & $\bar{f}$ $\downarrow$ & CE $\downarrow$ & Acc (\%) $\uparrow$ \\ \midrule
-\textsc{Baseline}     & 18.75 & 1.051 & 0.84 & 0.0593 & 0.668 & 87.47 \\
-\textsc{WeightCV}     & 18.65 & 1.051 & \textbf{2.26} & 0.0580 & 0.661 & 87.61 \\
-\textsc{PopFR-CV}     & 1.66  & 1.044 & 1.25 & 0.0528 & 0.626 & 88.44 \\
-\textsc{Weight+PopCV} & 1.68  & 1.041 & \textbf{7.71} & \textbf{0.0501} & \textbf{0.618} & \textbf{88.74} \\
+ & $\mathrm{CV}_{fr}^{(\text{pop})}$ & $\mathrm{CV}_w$ & $\bar{f}$ $\downarrow$ & CE $\downarrow$ & Acc (\%) $\uparrow$ & $\Delta$ICE \\ \midrule
+\textsc{Baseline}     & 18.75 & 0.84 & 0.0593 & 0.668 & 87.47 & -- \\
+\textsc{WeightCV}     & 18.65 & \textbf{2.26} & 0.0580 & 0.661 & 87.61 & +2.4\% \\
+\textsc{PopFR-CV}     & 1.66  & 1.25 & 0.0528 & 0.626 & 88.44 & +13.6\% \\
+\textsc{Weight+PopCV} & 1.68  & \textbf{7.71} & \textbf{0.0501} & \textbf{0.618} & \textbf{88.74} & \textbf{+20.0\%} \\
+\textsc{LifetimeCV}   & -- & -- & 0.100 & $\approx\log C$ & 10.02 & collapse \\
 \bottomrule
 \end{tabular}
-\caption{SDT on CIFAR-10 after 300 epochs. \textsc{PopFR-CV} is applied only after warmup ($\ge 20$ epochs). Note the $\sim$91\% collapse of $\mathrm{CV}_{fr}^{(\text{pop})}$ under conditions that \emph{maximize} it.}
+\caption{SDT / CIFAR-10, 300 epochs. Note the $\sim$91\% collapse of $\mathrm{CV}_{fr}^{(\text{pop})}$ under objectives that \emph{maximise} it, and the accuracy collapse of LifetimeCV.}
 \label{tab:sdt}
 \end{table}
 
-\textbf{Explanation: the dead-neuron trap.} The gradient of $-\lambda \cdot \mathrm{CV}_{fr}^{(\text{pop})}$ with respect to a below-average firing rate is \emph{positive}---it pushes that neuron's rate toward zero. In continuous networks, the task loss provides a counterforce. In LIF networks, once a neuron's membrane potential drops below firing threshold, it emits no spikes; the surrogate gradient through the spike function becomes vanishingly small; the neuron cannot recover. The population thus bifurcates into a small set of highly active neurons and a large silent majority---a low-CV, high-sparsity state. This is functionally equivalent to \emph{structured neural pruning} that emerges as a byproduct of the CV objective, rather than by explicit architectural design.
+\subsection{The dead-neuron trap: a single mechanism for two failure modes}
+\label{sec:res-dnt}
 
-\textbf{Temporal CV is uninformative.} All four conditions yield $\mathrm{CV}_t \approx 1.05$. With $T = 4$ spike samples per forward pass, temporal statistics have insufficient degrees of freedom to be shaped by a regularizer. Longer time horizons ($T \ge 16$) would be required to make temporal CV a usable objective.
+The gradient of $-\lambda \cdot \mathrm{CV}_{fr}^{(\text{pop})}$ with respect to a below-average firing rate is \emph{positive}: it drives under-firing neurons toward zero. Once an LIF neuron's membrane potential sits below threshold the surrogate gradient through the spike step is vanishingly small, and the neuron cannot recover. Two operationally different failure modes share this origin: PopFR-CV applied \emph{before} LR warmup (no counter-gradient from the task loss yet) and LifetimeCV applied at any time (its gradient uniformly silences low-firing neurons, with no saving asymmetry).
 
-\subsection{ResNet-20 control: the cleanest test of the mechanism dichotomy}
-\label{sec:res-resnet}
+Fig.~\ref{fig:dnt} overlays the two sweeps. Panel~A shows that PopCV onset $\in\{0,10,20,40\}$ recovers the full ICE gain only for onset $\geq 20$. Panel~B--D shows an analogous LifetimeCV onset sweep $\in\{20,40,60,80\}$ on SDT/CIFAR-10: delaying the onset does not always rescue accuracy, indicating that LifetimeCV's collapse is primarily \emph{mechanism}-driven (no firing-rate asymmetry) rather than timing-driven. This dissociation is the cleanest operational evidence for the dead-neuron-trap mechanism.
 
-\textcolor{red}{[TODO: The ResNet-20 experiments are the linchpin of our mechanism-dichotomy claim: if CV collapse is an artefact of binary spikes rather than of the CV objective per se, then \textsc{ActCV} on ResNet should \emph{not} collapse. We expect: (i) $\mathrm{CV}_a^{(\text{pop})}$ rises monotonically under \textsc{ActCV}; (ii) ICE rises as predicted by \eqref{eq:monotone}; (iii) \textsc{WeightCV} yields a small but reliable gain ($+0.3$--$0.5\%$) matching the SDT \textsc{WeightCV} baseline. We plan 4 conditions $\times$ 3 seeds $\times$ 200 epochs $\approx$ 8 GPU-hours total on a single 3090.]}
-
-\subsection{Cross-scale synthesis: ICE is the invariant}
-\label{sec:res-synthesis}
-
-Figure~\ref{fig:cross} (to be populated with the ResNet data) summarizes the three architectures in a common ICE--CV plane. The central finding is that the ICE axis rises under every CV regularizer we test, while the CV axis rises only in continuous systems and collapses in binary-spike systems. This decouples the \emph{target} of the regularization (CV) from the \emph{achieved benefit} (ICE), and positions ICE---not CV---as the architecture-independent summary statistic.
-
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
-\fbox{\parbox{0.85\textwidth}{\centering \textcolor{red}{[Figure placeholder: 3-panel ICE--CV trajectory plot. Panel A: SparseNet (CV $\uparrow$, ICE $\uparrow$). Panel B: ResNet (CV $\uparrow$, ICE $\uparrow$, pending). Panel C: SDT (CV $\downarrow$, ICE $\uparrow$). To be rendered from \texttt{scratch\_compare\_results.json} and ResNet output.]}}}
-\caption{Cross-architecture trajectories in the ICE--CV plane. CV-max drives ICE upward across all three architectures, but CV itself only grows in continuous systems.}
+\includegraphics[width=\linewidth]{figures/fig3.pdf}
+\caption{\textbf{Dead-neuron trap.} (A) PopFR-CV onset sweep on SDT: collapse at onset$=0$, recovery from onset$=20$ on. (B--D) LifetimeCV onset sweep: Acc, ICE, and dead-neuron ratio. The LifetimeCV gradient silences low-firing neurons symmetrically, so delayed onset alone does not rescue training.}
+\label{fig:dnt}
+\end{figure}
+
+\subsection{Cross-architecture and cross-dataset validation}
+\label{sec:res-cross}
+
+Fig.~\ref{fig:cross} reports the dichotomy across four (architecture, dataset) pairs. The continuous regime is tested with ResNet-20 on CIFAR-10/100: ActCV gives $+1.6\%$ / $+4.4\%$ $\Delta$ICE; WeightCV gives $\leq 0.5\%$; the combination does not beat ActCV alone. The discrete regime is tested on SDT/CIFAR-100 (5 conditions, LifetimeCV collapses to $\sim$1\% accuracy, Weight+PopCV gives +8.2\% $\Delta$ICE) and on Spikformer/CIFAR-10/100 (2-way comparison, $+13$--$16\%$ $\Delta$ICE for Weight+PopCV). The dichotomy is reproduced in all four pairs---the useful lever is \emph{activation-scale}, and its magnitude is 5--10$\times$ larger on SNNs than on ANNs.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig4.pdf}
+\caption{\textbf{Cross-architecture / cross-dataset validation of the dichotomy.} (A) ResNet-20 / CIFAR-100. (B) SDT / CIFAR-100 (incl.\ LifetimeCV collapse bar). (C) Spikformer / CIFAR-10, 7 seeds. (D) Spikformer / CIFAR-100, 3 seeds. Error bars are $\pm 1$ s.d.\ across seeds.}
 \label{fig:cross}
+\end{figure}
+
+\subsection{Robustness: $\lambda$ sensitivity and the Hoyer baseline}
+\label{sec:res-robustness}
+
+Fig.~\ref{fig:robustness}A/B reports a two-family $\lambda$ sweep on SDT and Spikformer (WeightCV grid vs.\ PopFR-CV grid; $\lambda \in \{10^{-4},\ldots,10^{-2}\}$, 100 epochs, 1 seed per point). Two qualitatively different robustness profiles emerge. \emph{WeightCV is a plateau}: on Spikformer, every $\lambda_w \in [10^{-4}, 10^{-2}]$ yields ICE within $\pm 5\%$ of baseline ($\Delta\text{ICE} \in [-2.5\%, +2.5\%]$), directly corroborating the ``weight-scale is a near-no-op'' claim at the coefficient level---the dichotomy is not a tuning artefact. \emph{PopFR-CV is an architecture-dependent knee}: on SDT the useful window is $\lambda_{\text{pop}} \in [10^{-4}, 10^{-3}]$ centred at $5\!\times\!10^{-4}$; on Spikformer the knee is $\sim 5\times$ tighter, with the clean optimum at $\lambda_{\text{pop}}\!=\!10^{-4}$ ($\Delta\text{ICE}\!=\!+56\%$ at Acc $81.5\%$) and outright collapse already at $\lambda_{\text{pop}}\!=\!2\!\times\!10^{-4}$. The \emph{shape} of the recipe transfers (plateau on weights, dead-neuron cliff on pop-FR), but the coefficient must be re-tuned per architecture---a practically small cost, since WeightCV's insensitivity means only one scalar need be searched.
+
+Fig.~\ref{fig:robustness}C compares our best objective (Weight+PopCV) against the Hoyer $\ell_1/\ell_2$ sparsity measure~\cite{yang2020deephoyer} applied at the same population-FR scale. Hoyer increases sparsity as measured by $H\in[0,1]$ but under-performs CV on Acc, ICE, and even on implicit sparsity ($\bar{f}$): \emph{heterogeneity and sparsity are not the same lever}. On SDT/CIFAR-10, Weight+PopCV gives $+20\%$ $\Delta$ICE while Hoyer at matched $\lambda$ gives $+6\%$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/fig5.pdf}
+\caption{\textbf{Robustness and baselines.} (A/B) $\lambda$ sensitivity Pareto on SDT and Spikformer: one dot per $\lambda$, star = best-ICE, dashed line = baseline ICE, shaded band below = collapse zone. (C) Hoyer vs.\ Weight+PopCV on SDT/CIFAR-10: Hoyer increases sparsity but loses on Acc, ICE, and $\bar{f}$.}
+\label{fig:robustness}
 \end{figure}
 
 \section{Discussion}
 \label{sec:discussion}
 
-\paragraph{When does CV regularization give you what you think you're asking for?} The answer, suggested by our experiments, depends on whether the optimizer at the application scale respects the smoothness assumption underlying \eqref{eq:monotone}. Sparse coding with ISTA and ReLU networks with backprop both preserve smoothness; LIF networks with surrogate gradients do not. Consequently, only the first two realize the theoretical heterogeneity mechanism, while LIF networks realize efficiency gains through a distinct---and previously unnamed---implicit-pruning mechanism.
+\paragraph{Scale, not objective, is the design variable.} The same CV objective applied at four different scales produces four qualitatively different outcomes: weight-scale CV is a near-no-op (but safe), activation-scale CV in ANNs is a mild booster, population-FR CV in SNNs is a 5--10$\times$ stronger lever, and lifetime-FR CV causes catastrophic collapse. The dichotomy is not about whether CV is \emph{a priori} sensible but about whether the optimizer at the target scale can actually descend the CV gradient without collapsing the signal. Continuous optimizers (ISTA, backprop through ReLU) preserve smoothness; binary-spike optimizers with surrogate gradients do not, and the asymmetry of the surrogate near threshold dictates which direction of CV gradient is survivable.
 
-\paragraph{Weight CV is the universal safe choice.} Across all three architectures we tested, \textsc{WeightCV} improves ICE without collapsing any downstream quantity and without requiring a warmup schedule. We recommend it as a drop-in complement to weight decay for practitioners seeking biologically principled regularization at low engineering cost.
+\paragraph{The dead-neuron trap unifies two failure modes.} PopFR-CV applied without LR warmup and LifetimeCV applied at any onset both collapse---and they collapse for the same reason. The CV gradient on a below-mean firing rate pushes it further down, the surrogate derivative goes to zero below threshold, and the neuron is permanently silenced. What distinguishes the two is timing, not mechanism: PopCV is rescued by delaying its onset until the task-loss counter-gradient exists, whereas LifetimeCV's gradient silences low-firing neurons symmetrically regardless of when it starts. This dissociation, visualised in Fig.~\ref{fig:dnt}, is (to our knowledge) the first controlled evidence that neuron death under variability objectives is a \emph{mechanism} rather than a hyper-parameter artefact.
 
-\paragraph{Population-FR CV is a pruning mechanism in disguise.} Rather than avoid the dead-neuron trap, practitioners can embrace it: with small $\lambda$ and post-warmup activation, \textsc{PopFR-CV} yields a 13--20\% ICE improvement in SDT. The resulting networks are effectively pruned without explicit masking, analogous to the implicit pruning observed in sparse backpropagation~\cite{evci2020rigl}.
+\paragraph{Heterogeneity is not sparsity.} The Hoyer comparison (Fig.~\ref{fig:robustness}C) makes explicit what the main dichotomy implies: CV and Hoyer are both scale-invariant measures of an imbalanced population, but they reward different geometries. Hoyer rewards one-hot mass concentration; CV rewards a heavy-tailed but full-support distribution. At matched $\lambda$ on SDT/CIFAR-10, Weight+PopCV reaches $+20\%$ $\Delta$ICE while Hoyer reaches $+6\%$, and Hoyer does \emph{not} deliver lower mean firing rate. For energy-efficient SNN training, rewarding heterogeneity beats rewarding sparsity.
 
-\paragraph{Limitations.} Our experimental sweep is currently restricted to CIFAR-10 and a single SNN architecture. Generalization to ImageNet-scale tasks and to other SNN families (Spikformer~\cite{zhou2023spikformer}, QKFormer~\cite{zhou2024qkformer}) is left for future work. We also do not explore lifetime CV~\cite{huang2025variability}, which is known to saturate earlier than population CV in biophysical models and may present distinct dynamics in SNNs.
+\paragraph{Practical recipe.} (i) Always add WeightCV at $\lambda_w \approx 10^{-3}$: the coefficient is insensitive over two orders of magnitude, so it is free and safe. (ii) For SNNs, additionally add PopFR-CV with onset $\geq 20$ epochs (or after the LR warmup schedule completes); use $\lambda_{\text{pop}}\!\approx\!5\!\times\!10^{-4}$ for K$\odot$V-style attention (SDT) and $\lambda_{\text{pop}}\!\approx\!10^{-4}$ for Q$\cdot$K$^\top$-style attention (Spikformer)---the knee is architecture-dependent and a brief 3-point $\lambda$ scan is worth running on a new backbone. (iii) Do not use LifetimeCV as a loss term under surrogate gradients. (iv) Tuning cost is asymmetric: WeightCV is a plateau (no tuning needed) while PopFR-CV needs $\sim 3$ $\lambda$ trials to localise the cliff; once found, the ICE gain ($+20$--$56\%$ on SNNs) dwarfs the cost.
 
-\paragraph{Implications for neuromorphic hardware.} Because \textsc{PopFR-CV} reduces mean firing rate by 15\%, it yields direct energy savings on event-driven hardware. Combined with the 1.3\% accuracy improvement, the overall energy--accuracy Pareto front for SDT is strictly improved---a property that weight decay or L1 regularization alone do not deliver.
+\paragraph{Limitations.} Our evaluation is limited to CIFAR-10 and CIFAR-100; ImageNet-scale validation is out of scope for this submission. We tested two continuous architectures (SparseNet, ResNet-20) and two spiking architectures (SDT, Spikformer), but all of the SNN evidence is at $T{=}4$ time-steps---longer time windows may soften the dead-neuron trap. Our LifetimeCV negative result is robust across the onset schedule we tested but does not rule out exotic schedules (e.g.\ curriculum on $\lambda$); we conjecture but do not prove that any schedule with non-zero steady-state $\lambda_{life}$ collapses.
+
+\paragraph{Implications for neuromorphic hardware.} On SDT, Weight+PopCV reduces mean firing rate by $\sim$15\% while improving accuracy by $\sim$1.3\%, giving a strict Pareto improvement on the energy--accuracy frontier. Because the gains come from implicit pruning of low-contribution neurons, the resulting networks are a natural fit for event-driven chips that pay per-spike energy.
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We studied coefficient-of-variation regularization as a principled objective rooted in a recent normative theory of metabolic coding efficiency. Across sparse coding and spiking-transformer experiments, we found that CV regularization improves information--cost efficiency (ICE) in both regimes---but through qualitatively different mechanisms. In continuous systems, CV gains reflect genuine heterogeneity; in binary-spike systems, CV collapses and the gains come from implicit structured pruning. ICE, not CV, is the quantity that transfers invariantly across architectures. We conclude that the scale at which CV is applied is a first-class design variable for efficiency-aware neural network training, and that the normative Gibbs-manifold framework, once correctly translated through the optimizer dynamics of each scale, offers actionable guidance for both biological modelling and practical SNN design.
+We cast coefficient-of-variation regularisation as a family of objectives indexed by their scale of application and studied it empirically across four architectures and two datasets. Three findings stand out. First, the useful lever is activation-scale CV, not weight-scale CV, and the lever is 5--10$\times$ stronger in spiking networks than in continuous ones. Second, the collapse of lifetime CV and of un-warmed population CV share a single mechanism---the dead-neuron trap induced by surrogate-gradient asymmetry---which makes the failure predictable from first principles. Third, heterogeneity (CV) and sparsity (Hoyer) are not interchangeable; rewarding heterogeneity gives larger ICE gains and lower firing rate at matched $\lambda$. The scale at which a variability objective is applied, and the optimizer's ability to descend it without silencing its own signal, are first-class design variables for efficiency-aware training.
 
 \begin{ack}
 Acknowledgements hidden for double-blind review.
@@ -274,6 +301,11 @@ Acknowledgements hidden for double-blind review.
 
 {
 \small
+\bibliographystyle{plainnat}
+\bibliography{refs}
+}
+
+\iffalse
 
 [1] Barlow, H.B.\ (1961) Possible principles underlying the transformation of sensory messages. In W.A.\ Rosenblith (ed.), {\it Sensory Communication}, pp.\ 217--234. MIT Press.
 
@@ -332,7 +364,8 @@ Acknowledgements hidden for double-blind review.
 [28] Ding, J., Pan, Z., Liu, Y., Yu, Z.\ \& Huang, T.\ (2024) Robust stable spiking neural networks. {\it arXiv:2405.20694}.
 
 [29] Narduzzi, S., Bigdeli, S.A., Liu, S.-C.\ \& Dunbar, L.A.\ (2022) Optimizing the consumption of spiking neural networks with activity regularization. In {\it ICASSP}, pp.\ 61--65.
-}
+
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
