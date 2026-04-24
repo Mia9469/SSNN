@@ -249,40 +249,112 @@ def run_sweep() -> dict:
 
 # ── Plotting ──────────────────────────────────────────────────────────────────
 def plot(results: dict):
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
-    fig.suptitle(f"λ sensitivity sweep on SDT / CIFAR-10 ({results.get('epochs', N_EPOCHS)} epochs)",
+    """Pareto plot: one panel per CV family.
+
+    Readability choices:
+      * scatter only (no λ-ordered connecting line → no zigzag)
+      * shared y-axis across panels so ICE magnitudes compare directly
+      * horizontal dashed line at family baseline ICE (λ=0)
+      * optimum marked with a star
+      * ICE < baseline → tagged "collapse" (red tint annotation box)
+      * marker size & colour encode |λ| (log scale) so reading order is clear
+    """
+    families = [
+        ("family_weight", "WeightCV only: λ_w",  "#C62828"),
+        ("family_pop",    "PopFR-CV only: λ_p",  "#2E7D32"),
+    ]
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5.2), sharey=True)
+    fig.suptitle(f"λ sensitivity sweep on SDT / CIFAR-10 "
+                 f"({results.get('epochs', N_EPOCHS)} epochs, 1 seed)",
                  fontsize=13, fontweight="bold")
 
-    panels = [
-        ("family_weight", LAMBDA_WEIGHT_GRID, "WeightCV: λ_w",  axes[0], "#C62828"),
-        ("family_pop",    LAMBDA_POP_GRID,    "PopFR-CV: λ_p",  axes[1], "#2E7D32"),
-    ]
-    for key, grid, title, ax, color in panels:
+    # Unified y-axis range from both families, padded
+    all_ice = [e["ice"] for fam in ("family_weight", "family_pop")
+               for e in results.get(fam, [])]
+    if all_ice:
+        ice_lo = min(all_ice) - 30
+        ice_hi = max(all_ice) + 30
+    else:
+        ice_lo, ice_hi = 0, 1500
+
+    for (key, title, color), ax in zip(families, axes):
         entries = results.get(key, [])
         if not entries:
             ax.text(0.5, 0.5, f"(no data for {key})", ha="center", va="center",
                     transform=ax.transAxes)
             ax.set_title(title); continue
 
-        # Sort by lambda for consistent trajectory
         entries_sorted = sorted(entries, key=lambda d: d["lambda"])
-        accs   = [e["acc"]     for e in entries_sorted]
-        ices   = [e["ice"]     for e in entries_sorted]
-        lams   = [e["lambda"]  for e in entries_sorted]
+        accs = np.array([e["acc"]    for e in entries_sorted])
+        ices = np.array([e["ice"]    for e in entries_sorted])
+        lams = np.array([e["lambda"] for e in entries_sorted])
 
-        # Pareto-style trajectory
-        ax.plot(accs, ices, "-", color=color, lw=1.0, alpha=0.5)
-        for a, i, lam in zip(accs, ices, lams):
+        # Baseline ICE = the λ=0 run
+        base_mask = lams == 0
+        base_ice  = float(ices[base_mask][0]) if base_mask.any() else None
+        best_idx  = int(np.argmax(ices))
+
+        # Marker size by |λ| (smallest non-zero ~ 40, largest ~ 130)
+        nz = lams[lams > 0]
+        if len(nz):
+            log_lo, log_hi = np.log10(nz.min()), np.log10(nz.max())
+        else:
+            log_lo, log_hi = -4, -2
+        def msize(lam):
+            if lam == 0:
+                return 140
+            t = (np.log10(lam) - log_lo) / max(1e-9, log_hi - log_lo)
+            return 55 + 55 * t    # 55 → 110
+
+        # Scatter (no connecting line)
+        for a, i_, lam in zip(accs, ices, lams):
+            is_collapse = base_ice is not None and i_ < base_ice - 5
+            face = "#f0f0f0" if lam == 0 else color
+            edge = "black"
+            mk = "o"
+            ax.scatter([a], [i_], s=msize(lam), color=face,
+                       edgecolor=edge, linewidth=1.0, zorder=3, marker=mk)
             tag = "λ=0 (base)" if lam == 0 else f"λ={lam:.0e}"
-            marker_size = 90 if lam == 0 else 55
-            ax.scatter([a], [i], s=marker_size, color=color,
-                       edgecolor="black", zorder=3)
-            ax.annotate(tag, (a, i), textcoords="offset points",
-                        xytext=(6, 4), fontsize=8)
+            if is_collapse:
+                tag = tag + "  ⚠"
+                ax.annotate(tag, (a, i_), textcoords="offset points",
+                            xytext=(8, -4), fontsize=8, color="#b71c1c",
+                            bbox=dict(boxstyle="round,pad=0.15",
+                                      fc="#ffebee", ec="#b71c1c", lw=0.6))
+            else:
+                ax.annotate(tag, (a, i_), textcoords="offset points",
+                            xytext=(8, 4), fontsize=8)
+
+        # Best point: star overlay
+        ax.scatter([accs[best_idx]], [ices[best_idx]],
+                   s=250, marker="*", color="#fdd835",
+                   edgecolor="black", linewidth=0.8, zorder=4)
+
+        # Baseline horizontal reference (label on the right edge, above the line)
+        if base_ice is not None:
+            ax.axhline(base_ice, color="gray", ls="--", lw=0.8, alpha=0.7)
+            ax.text(0.985, base_ice + (ice_hi - ice_lo) * 0.008,
+                    f"baseline ICE={base_ice:.0f}", fontsize=7.5,
+                    color="gray", ha="right", va="bottom",
+                    transform=ax.get_yaxis_transform())
+
+            # Collapse band shading below baseline
+            ax.axhspan(ice_lo, base_ice - 5, color="#b71c1c",
+                       alpha=0.04, zorder=0)
+
         ax.set_xlabel("Top-1 Accuracy (%)")
-        ax.set_ylabel("ICE = Acc / mean_fr")
+        if ax is axes[0]:
+            ax.set_ylabel("ICE = Acc / mean firing rate")
         ax.set_title(title, fontsize=11)
-        ax.grid(alpha=0.3)
+        ax.grid(alpha=0.25, linewidth=0.5)
+        ax.set_ylim(ice_lo, ice_hi)
+
+    # Shared legend-ish note
+    fig.text(0.5, -0.02,
+             "★ = highest ICE in family    "
+             "⚠ = ICE below baseline (collapse)    "
+             "marker size ∝ log|λ|",
+             ha="center", fontsize=8.5, color="#444")
 
     plt.tight_layout()
     plt.savefig(FIGURE_FILE, dpi=150, bbox_inches="tight")

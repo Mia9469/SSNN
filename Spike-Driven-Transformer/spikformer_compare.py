@@ -75,8 +75,19 @@ POP_CV_START     = WARMUP_EP
 
 N_SEEDS = 1                   # set to 3 if GPU-hours allow; 1 is enough for sign-check
 
-RESULTS_FILE = os.path.join(REPO, "spikformer_compare_results.json")
-FIGURE_FILE  = os.path.join(REPO, "spikformer_compare.png")
+# ── Dataset CLI (parsed early so output filenames can use the tag) ───────────
+_bootstrap_ap = argparse.ArgumentParser(add_help=False)
+_bootstrap_ap.add_argument("--dataset", choices=["cifar10", "cifar100"], default="cifar10")
+_bootstrap_ap.add_argument("--tag", default="")
+_BOOT, _ = _bootstrap_ap.parse_known_args()
+
+DATASET     = _BOOT.dataset
+NUM_CLASSES = 100 if DATASET == "cifar100" else 10
+_TAG        = f"_{_BOOT.tag}" if _BOOT.tag else ""
+
+RESULTS_FILE = os.path.join(REPO, f"spikformer_compare_results{_TAG}.json")
+FIGURE_FILE  = os.path.join(REPO, f"spikformer_compare{_TAG}.png")
+print(f"Dataset : {DATASET.upper()} ({NUM_CLASSES} classes)  |  out → {os.path.basename(RESULTS_FILE)}")
 
 CONFIGS = [
     {"name": "baseline",  "label": "Baseline",      "use_weight_cv": False, "use_pop_cv": False},
@@ -93,7 +104,7 @@ print(f"Epochs  : {N_EPOCHS} × {N_SEEDS} seeds  |  LR={LR}")
 def make_model() -> nn.Module:
     return create_model(
         "spikformer",
-        T=4, num_classes=10,
+        T=4, num_classes=NUM_CLASSES,
         img_size_h=32, img_size_w=32,
         patch_size=4, embed_dims=256, num_heads=8,
         mlp_ratios=4, depths=2,
@@ -116,10 +127,11 @@ train_tf = T.Compose([
 ])
 val_tf = T.Compose([T.ToTensor(), T.Normalize(MEAN, STD)])
 
-ds_train = torchvision.datasets.CIFAR10(os.path.join(REPO, "data"),
-                                        train=True,  download=True, transform=train_tf)
-ds_val   = torchvision.datasets.CIFAR10(os.path.join(REPO, "data"),
-                                        train=False, download=True, transform=val_tf)
+_DSCLS = torchvision.datasets.CIFAR100 if DATASET == "cifar100" else torchvision.datasets.CIFAR10
+ds_train = _DSCLS(os.path.join(REPO, "data"),
+                  train=True,  download=True, transform=train_tf)
+ds_val   = _DSCLS(os.path.join(REPO, "data"),
+                  train=False, download=True, transform=val_tf)
 
 _gpu = torch.cuda.is_available()
 _nw  = 4 if _gpu else 2
@@ -131,7 +143,7 @@ val_loader   = torch.utils.data.DataLoader(ds_val,   batch_size=BATCH_VAL,
 mixup_fn = Mixup(
     mixup_alpha=0.5, cutmix_alpha=0.0, prob=1.0,
     switch_prob=0.5, mode="batch",
-    label_smoothing=0.1, num_classes=10,
+    label_smoothing=0.1, num_classes=NUM_CLASSES,
 )
 
 
