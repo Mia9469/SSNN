@@ -83,7 +83,17 @@ N_SEEDS = 1                   # set to 3 if GPU-hours allow; 1 is enough for sig
 _bootstrap_ap = argparse.ArgumentParser(add_help=False)
 _bootstrap_ap.add_argument("--dataset", choices=["cifar10", "cifar100"], default="cifar10")
 _bootstrap_ap.add_argument("--tag", default="")
+_bootstrap_ap.add_argument("--lambda-pop", type=float, default=None,
+                           dest="lambda_pop",
+                           help="override LAMBDA_POP_CV at runtime (default: 1e-4)")
+_bootstrap_ap.add_argument("--lambda-weight", type=float, default=None,
+                           dest="lambda_weight",
+                           help="override LAMBDA_WEIGHT_CV at runtime (default: 1e-3)")
 _BOOT, _ = _bootstrap_ap.parse_known_args()
+if _BOOT.lambda_pop is not None:
+    LAMBDA_POP_CV = _BOOT.lambda_pop
+if _BOOT.lambda_weight is not None:
+    LAMBDA_WEIGHT_CV = _BOOT.lambda_weight
 
 DATASET     = _BOOT.dataset
 NUM_CLASSES = 100 if DATASET == "cifar100" else 10
@@ -102,6 +112,7 @@ COLORS = ["#1565C0", "#6A1B9A"]
 print(f"Device  : {DEVICE}")
 print(f"Model   : Spikformer (SSA attention, depth 2, dim 256, heads 8, T=4)")
 print(f"Epochs  : {N_EPOCHS} × {N_SEEDS} seeds  |  LR={LR}")
+print(f"λ_W={LAMBDA_WEIGHT_CV}  λ_pop={LAMBDA_POP_CV}  pop_cv_start={POP_CV_START}")
 
 
 # ── Model factory ─────────────────────────────────────────────────────────────
