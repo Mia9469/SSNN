@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "n": 40,
+    "group_size": 10,
+    "leak_a": 1.0,
+    "gain_high": 3.0,
+    "gain_low": 0.6,
+    "route_time": 1.0
+  },
+  "matched_spontaneous_quantities": {
+    "cost_state_a": 22.34,
+    "cost_state_b": 22.34,
+    "cost_abs_difference": 0.0,
+    "generator_spectrum_max_abs_difference": 0.0,
+    "covariance_spectrum_max_abs_difference": 1.7763568394002505e-15
+  },
+  "routing": {
+    "squared_task_transfer": [
+      [
+        1.2180175491295142,
+        0.04872070196518057
+      ],
+      [
+        0.04872070196518057,
+        1.2180175491295142
+      ]
+    ],
+    "routing_selectivity": 24.999999999999996,
+    "leading_input_abs_overlap": 1.0,
+    "leading_output_abs_overlap": 0.38461538461538464,
+    "routed_output_angle_degrees": 67.38013505195957,
+    "peak_squared_gain_state_a": 1.5897760736943263,
+    "peak_squared_gain_state_b": 1.5897760736943263,
+    "peak_time_state_a": 0.7557557557557557,
+    "peak_time_state_b": 0.7557557557557557
+  }
+}

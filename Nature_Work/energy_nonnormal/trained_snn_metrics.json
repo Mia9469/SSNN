@@ -1,0 +1,133 @@
+{
+  "description": "Trained recurrent SNN operator metrics. N=512 LIF networks trained on sequential MNIST and clusters tasks. Data aggregated from causal_reset experiments (prl_cv_criticality/) and point2_fair experiments (nature_matters_arising/).",
+  "key_finding": "Weight reciprocity eta_W stays near 0 (non-symmetric) across ALL tasks, initializations, and regularizers. The operator is non-normal. The DMD-based eta_implied appears near 1 only because the diagonal leak term dominates; off-diagonal antisymmetry is large (~0.75).",
+
+  "weight_reciprocity": {
+    "description": "eta_W = <W_ij W_ji> / <W_ij^2> for the recurrent weight matrix. 1 = symmetric, 0 = independent, -1 = antisymmetric.",
+    "clusters_N512": {
+      "mean_only": { "mean": 0.04, "range": [0.027, 0.045], "seeds": 3 },
+      "sigma2_fm": { "mean": 0.05, "range": [0.047, 0.052], "seeds": 3 },
+      "baseline": { "mean": 0.030, "range": [0.030, 0.031], "seeds": 3 }
+    },
+    "mnist_N512": {
+      "mean_only": { "mean": 0.041, "range": [0.035, 0.045], "seeds": 3 },
+      "sigma2_fm": { "mean": 0.048, "range": [0.043, 0.057], "seeds": 3 },
+      "baseline": { "mean": 0.039, "range": [0.036, 0.043], "seeds": 3 }
+    },
+    "trajectory_clusters": {
+      "description": "eta_W evolution from epoch 0 to convergence",
+      "subcritical_init_rho0.5": { "epoch_0": -0.009, "epoch_20": 0.045 },
+      "standard_init_rho0.9": { "epoch_0": -0.009, "epoch_20": 0.014 },
+      "critical_init_rho1.0": { "epoch_0": -0.009, "epoch_20": 0.014 },
+      "supercritical_init_rho1.3": { "epoch_0": -0.009, "epoch_20": 0.014 }
+    },
+    "trajectory_mnist": {
+      "description": "eta_W goes NEGATIVE on MNIST (anti-symmetric drift)",
+      "subcritical_init_rho0.5": { "epoch_0": -0.005, "epoch_30": -0.074 },
+      "standard_init_rho0.9": { "epoch_0": -0.005, "epoch_30": -0.063 },
+      "note": "eta_W < 0 means anti-correlated reciprocity — opposite of symmetry"
+    }
+  },
+
+  "operator_asymmetry": {
+    "description": "||Jbar - Jbar^T|| / ||Jbar|| — Frobenius asymmetry fraction of the time-averaged gated Jacobian",
+    "toy_operator_sym_ratio": {
+      "description": "||J_a||_F / ||J||_F where J_a = (J - J^T)/2, from toy_operator_nu_results.json",
+      "baseline": { "mean": 0.107, "std": 0.008 },
+      "pop_cv": { "mean": 0.072, "std": 0.012 },
+      "sigma2_fm": { "mean": 0.072, "std": 0.012 },
+      "hoyer": { "mean": 0.095, "std": 0.012 },
+      "mfr_l1": { "mean": 0.102, "std": 0.013 },
+      "spectral": { "mean": 0.104, "std": 0.008 }
+    },
+    "recurrent_snn_asymmetry": {
+      "description": "Direct asymmetry measurement from recurrent_snn_scale_results.json",
+      "baseline": 0.131,
+      "sigma2_fm": 0.118,
+      "pop_cv": 0.126,
+      "spectral": 0.131
+    },
+    "prl_reported_asymmetry": {
+      "description": "As reported in PRL supplemental Table SX",
+      "baseline": 0.233,
+      "sigma2_fm": 0.218,
+      "pop_cv": 0.224,
+      "spectral": 0.240
+    }
+  },
+
+  "dmd_metrics": {
+    "description": "Dynamic Mode Decomposition metrics from recurrent SNN spike trains",
+    "clusters_N512_baseline": {
+      "dmd_rho": { "mean": 0.966, "range": [0.963, 0.971], "seeds": 3 },
+      "dmd_antisym": { "mean": 0.092, "range": [0.088, 0.099], "seeds": 3 },
+      "dmd_eta": { "mean": 0.983, "range": [0.980, 0.985], "seeds": 3 },
+      "dmd_rot_med": { "mean": 0.516, "range": [0.466, 0.562], "seeds": 3 },
+      "warning": "dmd_eta ~ 0.98 appears near-symmetric but is a DIAGONAL-DOMINATED artifact. The off-diagonal antisymmetry is ~0.75 (see dmd_offdiag_antisym)."
+    },
+    "clusters_N512_sigma2_fm": {
+      "dmd_rho": { "mean": 0.981, "range": [0.963, 0.991], "seeds": 3 },
+      "dmd_antisym": { "mean": 0.095, "range": [0.089, 0.099], "seeds": 3 },
+      "dmd_eta": { "mean": 0.982, "range": [0.981, 0.984], "seeds": 3 }
+    },
+    "mnist_N512_baseline": {
+      "dmd_rho": { "mean": 0.973, "range": [0.961, 0.982], "seeds": 3 },
+      "dmd_antisym": { "mean": 0.185, "range": [0.169, 0.206], "seeds": 3 },
+      "dmd_eta": { "mean": 0.931, "range": [0.915, 0.943], "seeds": 3 },
+      "note": "MNIST has LARGER antisymmetry (~0.19) and LOWER dmd_eta (~0.93) — more non-normal than clusters"
+    },
+    "dmd_imag_spread_sdt": {
+      "description": "DMD imaginary-part standard deviation from SDT spectral analysis",
+      "baseline_per_layer": [0.004, 0.010, 0.012],
+      "mean_std_im": 0.009,
+      "prl_reported_approx": 0.03
+    }
+  },
+
+  "spectral_radii": {
+    "description": "Spectral radii at different levels of the operator",
+    "weight_rho_clusters": { "baseline": [1.59, 1.74, 1.66], "sigma2_fm": [2.01, 2.40, 2.29] },
+    "weight_rho_mnist": { "baseline": [3.78, 3.89, 4.51], "sigma2_fm": [3.94, 4.26, 4.54] },
+    "dmd_rho_clusters": { "baseline": [0.97, 0.96, 0.97], "sigma2_fm": [0.98, 0.96, 0.99] },
+    "dmd_rho_mnist": { "baseline": [0.98, 0.97, 0.96], "sigma2_fm": [0.97, 0.98, 0.98] },
+    "rho_eff_toy_operator": {
+      "baseline": 1.110, "pop_cv": 1.025, "sigma2_fm": 1.025,
+      "hoyer": 1.084, "mfr_l1": 1.083, "spectral": 1.057
+    },
+    "note": "weight_rho >> 1 (supercritical weights), but dmd_rho < 1 (subcritical effective dynamics) — the spike reset provides dynamic stabilization. This is the non-normal stabilization mechanism."
+  },
+
+  "covariance_exponents": {
+    "description": "Power-law exponent nu of the covariance eigenspectrum",
+    "nu_mem_clusters_baseline": { "mean": 0.755, "range": [0.706, 0.823], "seeds": 3 },
+    "nu_spike_clusters_baseline": { "mean": 0.345, "range": [0.340, 0.355], "seeds": 3 },
+    "nu_mem_mnist_baseline": { "mean": 1.280, "range": [1.132, 1.568], "seeds": 3 },
+    "nu_spike_mnist_baseline": { "mean": 0.632, "range": [0.568, 0.735], "seeds": 3 },
+    "nu_spont_recurrent_baseline": 1.279,
+    "nu_spont_recurrent_sigma2_fm": 1.236,
+    "nu_lyap_baseline": 0.579,
+    "nu_lyap_sigma2_fm": 0.447,
+    "nu_asymp_toy_baseline": 0.924,
+    "nu_asymp_toy_pop_cv": 0.906,
+    "nu_asymp_toy_hoyer": 0.758,
+    "nu_asymp_toy_spectral": 1.494,
+    "note": "nu_mem and nu_spike are DIFFERENT — the exponent is probe-dependent. nu_spike is lower because spikes are thresholded. The spontaneous (noise-driven) exponent differs from the task-driven one. This probe-dependence is a key argument in energy_nonnormal."
+  },
+
+  "weight_norms": {
+    "clusters_N512_baseline": { "mean": 22.96, "range": [22.83, 23.04] },
+    "clusters_N512_sigma2_fm": { "mean": 24.19, "range": [23.98, 24.31] },
+    "mnist_N512_baseline": { "mean": 28.19, "range": [28.13, 28.27] },
+    "mnist_N512_sigma2_fm": { "mean": 28.48, "range": [28.30, 28.72] }
+  },
+
+  "source_files": [
+    "prl_cv_criticality/causal_reset_h512_lam005.json",
+    "prl_cv_criticality/causal_reset_h256.json",
+    "prl_cv_criticality/causal_reset_conclusion.md",
+    "nature_matters_arising/ma_point2_fair_results.json",
+    "nature_matters_arising/ma_point2_fair_mnist.json",
+    "prl_cv_criticality/supplemental/toy_operator_nu_results.json",
+    "prl_cv_criticality/supplemental/recurrent_snn_scale_results.json"
+  ]
+}

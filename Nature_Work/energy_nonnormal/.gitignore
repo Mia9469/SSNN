@@ -1,0 +1,23 @@
+# Large local recordings.
+data/**/*.nwb
+data/**/*.nwb.*
+
+# Scratch render/audit products.
+tmp/
+
+# Python and OS caches.
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+
+# LaTeX intermediates (canonical PDFs are intentionally not ignored).
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
