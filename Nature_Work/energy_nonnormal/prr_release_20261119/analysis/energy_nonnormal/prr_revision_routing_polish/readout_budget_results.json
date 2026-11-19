@@ -1,0 +1,551 @@
+{
+  "description": "Exact reformulation of existing pair/readout laws",
+  "inversion_cases": 90,
+  "relative_price_cases": 45,
+  "maximum_cost_relative_error": 3.660194577854678e-12,
+  "allocation_ratio": 6.759999999999998,
+  "budget_price_crossing": 1.3993008900828878,
+  "rows": [
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.029132031351949934,
+      "slow_output_cost": 0.041013343711878036,
+      "fast_output_cost": 0.009763343711878036,
+      "relative_price": 4.200747707159154
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.08739609405584979,
+      "slow_output_cost": 0.5536801401104676,
+      "fast_output_cost": 0.13180514011035727,
+      "relative_price": 4.200747707159154
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.1310941410837747,
+      "slow_output_cost": 4.196312640836354,
+      "fast_output_cost": 0.9989442197837226,
+      "relative_price": 4.200747707159154
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.1074232572179435,
+      "slow_output_cost": 0.03904209776112899,
+      "fast_output_cost": 0.007792097761129435,
+      "relative_price": 5.010473297177004
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.3222697716538305,
+      "slow_output_cost": 0.5270683197752604,
+      "fast_output_cost": 0.10519331977523927,
+      "relative_price": 5.010473297177004
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.4834046574807458,
+      "slow_output_cost": 3.994623055138673,
+      "fast_output_cost": 0.7972546340860269,
+      "relative_price": 5.010473297177004
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.16944269316611663,
+      "slow_output_cost": 0.036675347222227206,
+      "fast_output_cost": 0.005425347222229426,
+      "relative_price": 6.759999999994685
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.5083280794983498,
+      "slow_output_cost": 0.4951171875000686,
+      "fast_output_cost": 0.0732421875000675,
+      "relative_price": 6.759999999994685
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.7624921192475248,
+      "slow_output_cost": 3.7524671052636656,
+      "fast_output_cost": 0.5550986842110381,
+      "relative_price": 6.759999999994685
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.16958977244722576,
+      "slow_output_cost": 0.03503719955944562,
+      "fast_output_cost": 0.0037871995594547236,
+      "relative_price": 9.251479624848361
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.5087693173416772,
+      "slow_output_cost": 0.4730021940525151,
+      "fast_output_cost": 0.051127194052515534,
+      "relative_price": 9.251479624848361
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.7631539760125159,
+      "slow_output_cost": 3.5848587338717017,
+      "fast_output_cost": 0.3874903128190019,
+      "relative_price": 9.251479624848361
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.0996362556891332,
+      "slow_output_cost": 0.03375072411936175,
+      "fast_output_cost": 0.0025007241193617524,
+      "relative_price": 13.49638045158524
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.29890876706739955,
+      "slow_output_cost": 0.4556347756113832,
+      "fast_output_cost": 0.03375977561138699,
+      "relative_price": 13.49638045158524
+    },
+    {
+      "rates": [
+        0.5,
+        2.0
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.4483631506010994,
+      "slow_output_cost": 3.4532319835809986,
+      "fast_output_cost": 0.2558635625284589,
+      "relative_price": 13.49638045158524
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.022187114429913737,
+      "slow_output_cost": 0.029097458743934712,
+      "fast_output_cost": 0.018274947921424034,
+      "relative_price": 1.5922047421992176
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.0665613432897412,
+      "slow_output_cost": 0.39281569304307834,
+      "fast_output_cost": 0.2467117969392555,
+      "relative_price": 1.5922047421992176
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.09984201493461181,
+      "slow_output_cost": 2.977129463063615,
+      "fast_output_cost": 1.8698157241709268,
+      "relative_price": 1.5922047421992176
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.08838231514954417,
+      "slow_output_cost": 0.026935896503460455,
+      "fast_output_cost": 0.01611338568095,
+      "relative_price": 1.6716472277645604
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.2651469454486325,
+      "slow_output_cost": 0.36363460279671295,
+      "fast_output_cost": 0.21753070669281682,
+      "relative_price": 1.6716472277645604
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.39772041817294873,
+      "slow_output_cost": 2.755967515932657,
+      "fast_output_cost": 1.6486537770403231,
+      "relative_price": 1.6716472277645604
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.15609215452907316,
+      "slow_output_cost": 0.023899832404189192,
+      "fast_output_cost": 0.013077321581679624,
+      "relative_price": 1.8275785492400478
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.4682764635872194,
+      "slow_output_cost": 0.3226477374565519,
+      "fast_output_cost": 0.17654384135265577,
+      "relative_price": 1.8275785492400478
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.7024146953808291,
+      "slow_output_cost": 2.4453302207233336,
+      "fast_output_cost": 1.3380164818303912,
+      "relative_price": 1.8275785492400478
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.16869189594926384,
+      "slow_output_cost": 0.021330552227806165,
+      "fast_output_cost": 0.010508041405298152,
+      "relative_price": 2.0299265491147827
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.5060756878477914,
+      "slow_output_cost": 0.2879624550753796,
+      "fast_output_cost": 0.14185855897148347,
+      "relative_price": 2.0299265491147827
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.7591135317716873,
+      "slow_output_cost": 2.182452291097616,
+      "fast_output_cost": 1.0751385522049293,
+      "relative_price": 2.0299265491147827
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.09840778740991335,
+      "slow_output_cost": 0.018968128541135332,
+      "fast_output_cost": 0.008145617718632425,
+      "relative_price": 2.328629846913423
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.29522336222974,
+      "slow_output_cost": 0.25606973530542837,
+      "fast_output_cost": 0.10996583920136971,
+      "relative_price": 2.328629846913423
+    },
+    {
+      "rates": [
+        0.7,
+        1.1
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.44283504334461005,
+      "slow_output_cost": 1.9407390465245475,
+      "fast_output_cost": 0.8334253076318571,
+      "relative_price": 2.328629846913423
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.024972548515934993,
+      "slow_output_cost": 0.10352428942657829,
+      "fast_output_cost": 0.006302067204360995,
+      "relative_price": 16.42703672772944
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.07491764554780497,
+      "slow_output_cost": 1.3975779072588381,
+      "fast_output_cost": 0.08507790725881481,
+      "relative_price": 16.42703672772944
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 0.1,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.11237646832170746,
+      "slow_output_cost": 10.59216940238255,
+      "fast_output_cost": 0.6448009813299196,
+      "relative_price": 16.42703672772944
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.08625587089120425,
+      "slow_output_cost": 0.10172799800416885,
+      "fast_output_cost": 0.004505775781963539,
+      "relative_price": 22.57724372609822
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.2587676126736127,
+      "slow_output_cost": 1.3733279730563501,
+      "fast_output_cost": 0.06082797305628551,
+      "relative_price": 22.57724372609822
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 0.5,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.3881514190104191,
+      "slow_output_cost": 10.408380427373961,
+      "fast_output_cost": 0.4610120063213121,
+      "relative_price": 22.57724372609822
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.12935621397663216,
+      "slow_output_cost": 0.09988198814081159,
+      "fast_output_cost": 0.0026597659185898515,
+      "relative_price": 37.55292427905662
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.38806864192989643,
+      "slow_output_cost": 1.3484068399011033,
+      "fast_output_cost": 0.035906839900968546,
+      "relative_price": 37.55292427905662
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 1.39930089008,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.5821029628948446,
+      "slow_output_cost": 10.219504470828301,
+      "fast_output_cost": 0.27213604977569705,
+      "relative_price": 37.55292427905662
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.1358796516523841,
+      "slow_output_cost": 0.09879593360963299,
+      "fast_output_cost": 0.0015737113874108033,
+      "relative_price": 62.77894053507282
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.40763895495715236,
+      "slow_output_cost": 1.3337451037302757,
+      "fast_output_cost": 0.02124510373004851,
+      "relative_price": 62.77894053507282
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 3.0,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.6114584324357285,
+      "slow_output_cost": 10.10838394405928,
+      "fast_output_cost": 0.161015523006669,
+      "relative_price": 62.77894053507282
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.2,
+      "target_dprime": 0.10165890331355934,
+      "slow_output_cost": 0.09796364344770567,
+      "fast_output_cost": 0.0007414212254839292,
+      "relative_price": 132.12953727322264
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.6,
+      "target_dprime": 0.304976709940678,
+      "slow_output_cost": 1.3225091865437657,
+      "fast_output_cost": 0.010009186544030158,
+      "relative_price": 132.12953727322264
+    },
+    {
+      "rates": [
+        0.2,
+        3.0
+      ],
+      "duration": 10.0,
+      "ceiling_fraction": 0.9,
+      "target_dprime": 0.457465064911017,
+      "slow_output_cost": 10.023227519070513,
+      "fast_output_cost": 0.07585909801791058,
+      "relative_price": 132.12953727322264
+    }
+  ],
+  "passed": true
+}

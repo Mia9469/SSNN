@@ -1,0 +1,1098 @@
+{
+  "sessions_with_pupil": 17,
+  "missing_pupil_sessions": [
+    "session_715093703",
+    "session_719161530",
+    "session_721123822",
+    "session_732592105",
+    "session_737581020"
+  ],
+  "matching_caliper": "0.5 SD of session trial-mean pupil area, >=80% coverage, same stimulus/300-s block",
+  "status": "Secondary exploratory robustness, not independent confirmation",
+  "pupil_matched": {
+    "pooled": {
+      "n": 0
+    },
+    "scalar": {
+      "n": 0
+    },
+    "diagonal": {
+      "n": 0
+    }
+  },
+  "pupil_available_unadjusted": {
+    "pooled": {
+      "n": 8,
+      "positive": 6,
+      "median": 0.0060488765019729735,
+      "median_bootstrap_CI95": [
+        -0.006127837225594925,
+        0.012569496223819674
+      ],
+      "wilcoxon_two_sided": 0.3828125
+    },
+    "scalar": {
+      "n": 8,
+      "positive": 6,
+      "median": 0.004335682893568426,
+      "median_bootstrap_CI95": [
+        -0.005480262017788168,
+        0.01239037850029946
+      ],
+      "wilcoxon_two_sided": 0.3828125
+    },
+    "diagonal": {
+      "n": 8,
+      "positive": 6,
+      "median": 0.003122367176399329,
+      "median_bootstrap_CI95": [
+        -0.006105938876783594,
+        0.012332823799948999
+      ],
+      "wilcoxon_two_sided": 0.3828125
+    }
+  },
+  "additive_pupil_adjusted": {
+    "pooled": {
+      "n": 8,
+      "positive": 7,
+      "median": 0.003628844515696795,
+      "median_bootstrap_CI95": [
+        0.0007210823616080342,
+        0.012558405915066934
+      ],
+      "wilcoxon_two_sided": 0.078125
+    },
+    "scalar": {
+      "n": 8,
+      "positive": 6,
+      "median": 0.004798473322943291,
+      "median_bootstrap_CI95": [
+        -0.002231219165403532,
+        0.009544431322666481
+      ],
+      "wilcoxon_two_sided": 0.109375
+    },
+    "diagonal": {
+      "n": 8,
+      "positive": 6,
+      "median": 0.004050205166507311,
+      "median_bootstrap_CI95": [
+        -0.005330946333830864,
+        0.010730721411862106
+      ],
+      "wilcoxon_two_sided": 0.25
+    }
+  },
+  "sessions": [
+    {
+      "session": "session_715093703",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "status": "no_pupil_trace"
+    },
+    {
+      "session": "session_719161530",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "status": "no_pupil_trace"
+    },
+    {
+      "session": "session_721123822",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "status": "no_pupil_trace"
+    },
+    {
+      "session": "session_732592105",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "status": "no_pupil_trace"
+    },
+    {
+      "session": "session_737581020",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "status": "no_pupil_trace"
+    },
+    {
+      "session": "session_744228101",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 386,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 9,
+      "status": "checked"
+    },
+    {
+      "session": "session_746083955",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 280,
+      "pupil_matched_pairs": 3,
+      "additive_adjustment_pairs": 29,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": 0.007955509963056934,
+          "scalar": 0.004443977654392535,
+          "diagonal": 0.003075839626552209
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 21,
+            "test_trials": 8,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 5.0937828049219105,
+            "mse": {
+              "1": {
+                "state": 3.693950367285306,
+                "pooled": 3.748064652804359,
+                "scalar": 3.7477255234933846,
+                "diagonal": 3.736253857710517
+              },
+              "5": {
+                "state": 5.011078958650623,
+                "pooled": 5.020047466010163,
+                "scalar": 5.018953582563647,
+                "diagonal": 5.021151230225923
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 21,
+            "test_trials": 8,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 4.161805239786072,
+            "mse": {
+              "1": {
+                "state": 3.3940370188971722,
+                "pooled": 3.3401639386386246,
+                "scalar": 3.3493738446504806,
+                "diagonal": 3.36197197758012
+              },
+              "5": {
+                "state": 3.951804683245404,
+                "pooled": 4.010695653655256,
+                "scalar": 3.9823607689688556,
+                "diagonal": 3.9691773631213882
+              }
+            }
+          }
+        ],
+        "train_pairs": 21,
+        "test_pairs": 8
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.0007210823616080342,
+          "scalar": -0.002231219165403532,
+          "diagonal": -0.005330946333830864
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 21,
+            "test_trials": 8,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 5.063411081174741,
+            "mse": {
+              "1": {
+                "state": 3.7401206336112645,
+                "pooled": 3.768656797707051,
+                "scalar": 3.7690943740619414,
+                "diagonal": 3.74431393624535
+              },
+              "5": {
+                "state": 5.0009330516332176,
+                "pooled": 5.006490137740912,
+                "scalar": 5.0074712966223265,
+                "diagonal": 4.995872668287891
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 21,
+            "test_trials": 8,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 3.987780125958561,
+            "mse": {
+              "1": {
+                "state": 3.323547862437073,
+                "pooled": 3.2977447887202564,
+                "scalar": 3.3102189318937945,
+                "diagonal": 3.315723006900464
+              },
+              "5": {
+                "state": 3.8776566359013462,
+                "pooled": 3.8790310889839112,
+                "scalar": 3.8547121010154024,
+                "diagonal": 3.83912474779448
+              }
+            }
+          }
+        ],
+        "train_pairs": 21,
+        "test_pairs": 8
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_750332458",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 344,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 12,
+      "status": "checked"
+    },
+    {
+      "session": "session_750749662",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 464,
+      "pupil_matched_pairs": 3,
+      "additive_adjustment_pairs": 31,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": -0.01918385244350477,
+          "scalar": -0.01147667300032918,
+          "diagonal": -0.00880976392041956
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 21,
+            "test_trials": 10,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 6.139086296257101,
+            "mse": {
+              "1": {
+                "state": 4.447209400161567,
+                "pooled": 4.499378151087118,
+                "scalar": 4.515100961817836,
+                "diagonal": 4.506351557856262
+              },
+              "5": {
+                "state": 5.9375291316180165,
+                "pooled": 5.848184596325568,
+                "scalar": 5.807850179003594,
+                "diagonal": 5.84574479466855
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 21,
+            "test_trials": 10,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 5.332720793461046,
+            "mse": {
+              "1": {
+                "state": 4.2018150180974745,
+                "pooled": 4.280708936505739,
+                "scalar": 4.254775064349093,
+                "diagonal": 4.2632037717392
+              },
+              "5": {
+                "state": 4.878346179282642,
+                "pooled": 4.751351102894171,
+                "scalar": 4.868588089530539,
+                "diagonal": 4.86411467314797
+              }
+            }
+          }
+        ],
+        "train_pairs": 21,
+        "test_pairs": 10
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.0018747129916564741,
+          "scalar": 0.007902268007593086,
+          "diagonal": 0.010730721411862106
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 21,
+            "test_trials": 10,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 6.154087466059369,
+            "mse": {
+              "1": {
+                "state": 4.480194036951362,
+                "pooled": 4.550260330246454,
+                "scalar": 4.5646549374456455,
+                "diagonal": 4.569812601454066
+              },
+              "5": {
+                "state": 5.89132882995974,
+                "pooled": 5.9231344086959,
+                "scalar": 5.8801176145127805,
+                "diagonal": 5.944506518687022
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 21,
+            "test_trials": 10,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 5.152448682331763,
+            "mse": {
+              "1": {
+                "state": 4.236768252594832,
+                "pooled": 4.249696653205983,
+                "scalar": 4.224879608519135,
+                "diagonal": 4.250599762328765
+              },
+              "5": {
+                "state": 4.726927289770869,
+                "pooled": 4.719617109452988,
+                "scalar": 4.817745829454746,
+                "diagonal": 4.792983780205342
+              }
+            }
+          }
+        ],
+        "train_pairs": 21,
+        "test_pairs": 10
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_754312389",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 77,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 16,
+      "status": "checked"
+    },
+    {
+      "session": "session_754829445",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 266,
+      "pupil_matched_pairs": 3,
+      "additive_adjustment_pairs": 19,
+      "status": "checked"
+    },
+    {
+      "session": "session_755434585",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 117,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 0,
+      "status": "checked"
+    },
+    {
+      "session": "session_756029989",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 465,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 73,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": 0.012569496223819674,
+          "scalar": 0.01239037850029946,
+          "diagonal": 0.012914851538512646
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 53,
+            "test_trials": 20,
+            "ridge": 0.01291549665014884,
+            "zero_mse": 4.384177873181583,
+            "mse": {
+              "1": {
+                "state": 3.3035638375056298,
+                "pooled": 3.410495211288982,
+                "scalar": 3.409565443109646,
+                "diagonal": 3.393860683719909
+              },
+              "5": {
+                "state": 4.276783957368982,
+                "pooled": 4.308560781288521,
+                "scalar": 4.310509426573851,
+                "diagonal": 4.320388871444211
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 53,
+            "test_trials": 20,
+            "ridge": 1e-05,
+            "zero_mse": 4.755217738713285,
+            "mse": {
+              "1": {
+                "state": 3.9632784060831265,
+                "pooled": 4.0099555420717135,
+                "scalar": 4.011705306230551,
+                "diagonal": 4.009683297749612
+              },
+              "5": {
+                "state": 4.480269033364464,
+                "pooled": 4.565344269702416,
+                "scalar": 4.561527219950828,
+                "diagonal": 4.5557996291197345
+              }
+            }
+          }
+        ],
+        "train_pairs": 53,
+        "test_pairs": 20
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.012558405915066934,
+          "scalar": 0.01234679259317172,
+          "diagonal": 0.011487542098533355
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 53,
+            "test_trials": 20,
+            "ridge": 1e-05,
+            "zero_mse": 4.313910093056034,
+            "mse": {
+              "1": {
+                "state": 3.3156609566475805,
+                "pooled": 3.4211239442964128,
+                "scalar": 3.420153765328657,
+                "diagonal": 3.3959895719221986
+              },
+              "5": {
+                "state": 4.237317966771645,
+                "pooled": 4.272660243230567,
+                "scalar": 4.273784732675598,
+                "diagonal": 4.276464967831339
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 53,
+            "test_trials": 20,
+            "ridge": 1e-05,
+            "zero_mse": 4.656425632071287,
+            "mse": {
+              "1": {
+                "state": 3.9622850485333543,
+                "pooled": 4.0101400023045795,
+                "scalar": 4.012058426998451,
+                "diagonal": 4.009301032874198
+              },
+              "5": {
+                "state": 4.435505403115516,
+                "pooled": 4.514311589405221,
+                "scalar": 4.511127094431692,
+                "diagonal": 4.500231982092854
+              }
+            }
+          }
+        ],
+        "train_pairs": 53,
+        "test_pairs": 20
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_757216464",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 448,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 27,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": 0.001721234132443554,
+          "scalar": 0.0028858282042719227,
+          "diagonal": 0.002695631934300421
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 19,
+            "test_trials": 8,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 11.002500153465046,
+            "mse": {
+              "1": {
+                "state": 6.937167601501171,
+                "pooled": 7.110986815146138,
+                "scalar": 7.074857392833717,
+                "diagonal": 7.061893335369995
+              },
+              "5": {
+                "state": 10.900901526237073,
+                "pooled": 10.96218860597019,
+                "scalar": 10.933238708697907,
+                "diagonal": 10.930053513456656
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 19,
+            "test_trials": 8,
+            "ridge": 1e-05,
+            "zero_mse": 5.387033414401077,
+            "mse": {
+              "1": {
+                "state": 4.63886777007533,
+                "pooled": 4.662879679665302,
+                "scalar": 4.630098636368467,
+                "diagonal": 4.651579918296642
+              },
+              "5": {
+                "state": 5.346676944555052,
+                "pooled": 5.335214315808969,
+                "scalar": 5.361936150687519,
+                "diagonal": 5.361446495557548
+              }
+            }
+          }
+        ],
+        "train_pairs": 19,
+        "test_pairs": 8
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.0026515168947029866,
+          "scalar": 0.003550437445052487,
+          "diagonal": 0.003818007550918311
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 19,
+            "test_trials": 8,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 10.9876281212752,
+            "mse": {
+              "1": {
+                "state": 6.92651722234487,
+                "pooled": 7.125870546853157,
+                "scalar": 7.088174377718172,
+                "diagonal": 7.074016325853524
+              },
+              "5": {
+                "state": 10.86302125142835,
+                "pooled": 10.949725275627785,
+                "scalar": 10.92249135587461,
+                "diagonal": 10.928227181408806
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 19,
+            "test_trials": 8,
+            "ridge": 1e-05,
+            "zero_mse": 5.320062046489292,
+            "mse": {
+              "1": {
+                "state": 4.638160360621338,
+                "pooled": 4.662003420830654,
+                "scalar": 4.624542626288073,
+                "diagonal": 4.646035465165282
+              },
+              "5": {
+                "state": 5.290955109869509,
+                "pooled": 5.277186653997412,
+                "scalar": 5.299937578579254,
+                "diagonal": 5.30000734797908
+              }
+            }
+          }
+        ],
+        "train_pairs": 19,
+        "test_pairs": 8
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_758798717",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 72,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 7,
+      "status": "checked"
+    },
+    {
+      "session": "session_760345702",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 243,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 0,
+      "status": "checked"
+    },
+    {
+      "session": "session_760693773",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 52,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 3,
+      "status": "checked"
+    },
+    {
+      "session": "session_761418226",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 211,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 24,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": -0.006127837225594925,
+          "scalar": -0.005480262017788168,
+          "diagonal": -0.006105938876783594
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 17,
+            "test_trials": 7,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 4.274951571247437,
+            "mse": {
+              "1": {
+                "state": 3.4203683606163238,
+                "pooled": 3.437934348439094,
+                "scalar": 3.4312193380410636,
+                "diagonal": 3.42074876549615
+              },
+              "5": {
+                "state": 4.0661756121313894,
+                "pooled": 4.032869286331695,
+                "scalar": 4.048449000649016,
+                "diagonal": 4.043237911362879
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 17,
+            "test_trials": 7,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 4.6882708299614855,
+            "mse": {
+              "1": {
+                "state": 4.24784872732881,
+                "pooled": 4.3099766046453585,
+                "scalar": 4.324427387844616,
+                "diagonal": 4.320341404323767
+              },
+              "5": {
+                "state": 4.390575276585454,
+                "pooled": 4.36964386891897,
+                "scalar": 4.358629861995991,
+                "diagonal": 4.358478094910829
+              }
+            }
+          }
+        ],
+        "train_pairs": 17,
+        "test_pairs": 7
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": -0.006399084703076313,
+          "scalar": -0.0063274613468179185,
+          "diagonal": -0.005873001918719143
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 17,
+            "test_trials": 7,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 4.223460683597029,
+            "mse": {
+              "1": {
+                "state": 3.408495014145024,
+                "pooled": 3.3950466885922874,
+                "scalar": 3.3919205160970525,
+                "diagonal": 3.3725696669200724
+              },
+              "5": {
+                "state": 4.013900547071918,
+                "pooled": 3.9990159747605167,
+                "scalar": 4.006665188914473,
+                "diagonal": 3.998545841529642
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 17,
+            "test_trials": 7,
+            "ridge": 0.4641588833612782,
+            "zero_mse": 4.960328911558441,
+            "mse": {
+              "1": {
+                "state": 4.336636189245249,
+                "pooled": 4.3864671094877155,
+                "scalar": 4.393042412552891,
+                "diagonal": 4.38789901332923
+              },
+              "5": {
+                "state": 4.678306555996897,
+                "pooled": 4.632304913593127,
+                "scalar": 4.624031689967225,
+                "diagonal": 4.638076158375077
+              }
+            }
+          }
+        ],
+        "train_pairs": 17,
+        "test_pairs": 7
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_762120172",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 376,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 52,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": 0.00762415360477737,
+          "scalar": 0.004227388132744318,
+          "diagonal": 0.00453255012635578
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 36,
+            "test_trials": 16,
+            "ridge": 1e-05,
+            "zero_mse": 4.9264651244466915,
+            "mse": {
+              "1": {
+                "state": 4.164081599717433,
+                "pooled": 4.158547681211592,
+                "scalar": 4.148985161803485,
+                "diagonal": 4.1378990231617285
+              },
+              "5": {
+                "state": 4.897071385089891,
+                "pooled": 4.890585610484659,
+                "scalar": 4.897799302956627,
+                "diagonal": 4.908883344757106
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 36,
+            "test_trials": 16,
+            "ridge": 1e-05,
+            "zero_mse": 5.926513775225699,
+            "mse": {
+              "1": {
+                "state": 5.004715368465269,
+                "pooled": 4.954893293556979,
+                "scalar": 4.978493668611711,
+                "diagonal": 4.993311995841036
+              },
+              "5": {
+                "state": 5.7007903046641735,
+                "pooled": 5.79896196294764,
+                "scalar": 5.750021970986459,
+                "diagonal": 5.740305015697013
+              }
+            }
+          }
+        ],
+        "train_pairs": 36,
+        "test_pairs": 16
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.006816844222963673,
+          "scalar": 0.004323375328995349,
+          "diagonal": 0.00428240278209631
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 36,
+            "test_trials": 16,
+            "ridge": 0.01291549665014884,
+            "zero_mse": 4.9453751211551396,
+            "mse": {
+              "1": {
+                "state": 4.176765929659478,
+                "pooled": 4.167029252416153,
+                "scalar": 4.162396167660124,
+                "diagonal": 4.146954799036832
+              },
+              "5": {
+                "state": 4.918602228502949,
+                "pooled": 4.907418114621915,
+                "scalar": 4.912396279560881,
+                "diagonal": 4.926589302919266
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 36,
+            "test_trials": 16,
+            "ridge": 1e-05,
+            "zero_mse": 5.848936502106182,
+            "mse": {
+              "1": {
+                "state": 4.971613364838534,
+                "pooled": 4.930381211758733,
+                "scalar": 4.947928607890225,
+                "diagonal": 4.962431283240749
+              },
+              "5": {
+                "state": 5.650599107104883,
+                "pooled": 5.74356923010764,
+                "scalar": 5.708513230352271,
+                "diagonal": 5.691247731313799
+              }
+            }
+          }
+        ],
+        "train_pairs": 36,
+        "test_pairs": 16
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_763673393",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 57,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 3,
+      "status": "checked"
+    },
+    {
+      "session": "session_791319847",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 406,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 71,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": 0.004473599399168577,
+          "scalar": 0.005208703903873971,
+          "diagonal": 0.0031688947262464495
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 52,
+            "test_trials": 19,
+            "ridge": 1e-05,
+            "zero_mse": 5.721072181047365,
+            "mse": {
+              "1": {
+                "state": 3.9913847007740877,
+                "pooled": 4.041307545228243,
+                "scalar": 4.027097398669253,
+                "diagonal": 4.017639581251575
+              },
+              "5": {
+                "state": 5.60490075477391,
+                "pooled": 5.609751880256646,
+                "scalar": 5.570451788685159,
+                "diagonal": 5.5877211586816715
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 52,
+            "test_trials": 19,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 4.601497536517589,
+            "mse": {
+              "1": {
+                "state": 3.921185071781116,
+                "pooled": 3.9605351404936857,
+                "scalar": 3.940431056713782,
+                "diagonal": 3.924393592030966
+              },
+              "5": {
+                "state": 4.435867431922379,
+                "pooled": 4.473136151702506,
+                "scalar": 4.511510647638798,
+                "diagonal": 4.47884842126806
+              }
+            }
+          }
+        ],
+        "train_pairs": 52,
+        "test_pairs": 19
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.004606172136690604,
+          "scalar": 0.005273571316891233,
+          "diagonal": 0.003511655032633669
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 52,
+            "test_trials": 19,
+            "ridge": 0.01291549665014884,
+            "zero_mse": 5.69678522234997,
+            "mse": {
+              "1": {
+                "state": 3.9930879090812943,
+                "pooled": 4.028428951905108,
+                "scalar": 4.013916513867024,
+                "diagonal": 4.004006169778405
+              },
+              "5": {
+                "state": 5.586636594383425,
+                "pooled": 5.590799509985284,
+                "scalar": 5.553278749832257,
+                "diagonal": 5.568040858063896
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 52,
+            "test_trials": 19,
+            "ridge": 0.0774263682681127,
+            "zero_mse": 4.589611501302472,
+            "mse": {
+              "1": {
+                "state": 3.923070718150482,
+                "pooled": 3.962444073413823,
+                "scalar": 3.942866079272347,
+                "diagonal": 3.927563745368379
+              },
+              "5": {
+                "state": 4.431307780175137,
+                "pooled": 4.470235011018747,
+                "scalar": 4.506589794204612,
+                "diagonal": 4.478523688326143
+              }
+            }
+          }
+        ],
+        "train_pairs": 52,
+        "test_pairs": 19
+      },
+      "status": "checked"
+    },
+    {
+      "session": "session_798911424",
+      "scope": "Exploratory pupil checks; no causal state manipulation or complete arousal adjustment",
+      "pupil_valid_trials": 219,
+      "pupil_matched_pairs": 0,
+      "additive_adjustment_pairs": 35,
+      "pupil_available_unadjusted": {
+        "delta_R2": {
+          "pooled": 0.016234378911293527,
+          "scalar": 0.012569187384552448,
+          "diagonal": 0.012332823799948999
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 26,
+            "test_trials": 9,
+            "ridge": 1e-05,
+            "zero_mse": 5.061203283837802,
+            "mse": {
+              "1": {
+                "state": 3.757464386805646,
+                "pooled": 3.815710308068491,
+                "scalar": 3.8146171185227167,
+                "diagonal": 3.800110046258555
+              },
+              "5": {
+                "state": 4.77920457735083,
+                "pooled": 4.846926657200766,
+                "scalar": 4.860517356166398,
+                "diagonal": 4.861874385594019
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 26,
+            "test_trials": 9,
+            "ridge": 1e-05,
+            "zero_mse": 4.643292363288791,
+            "mse": {
+              "1": {
+                "state": 3.809693896796908,
+                "pooled": 3.778943272781058,
+                "scalar": 3.798555792129734,
+                "diagonal": 3.80383259483295
+              },
+              "5": {
+                "state": 4.280226999499158,
+                "pooled": 4.368858765579237,
+                "scalar": 4.322353158753078,
+                "diagonal": 4.3189131707654385
+              }
+            }
+          }
+        ],
+        "train_pairs": 26,
+        "test_pairs": 9
+      },
+      "additive_pupil_adjusted": {
+        "delta_R2": {
+          "pooled": 0.02558549744786684,
+          "scalar": 0.009544431322666481,
+          "diagonal": 0.009688581693910767
+        },
+        "states": [
+          {
+            "state": 0,
+            "train_trials": 26,
+            "test_trials": 9,
+            "ridge": 1e-05,
+            "zero_mse": 5.045044279418747,
+            "mse": {
+              "1": {
+                "state": 3.800758418630651,
+                "pooled": 3.853695266458827,
+                "scalar": 3.84923386402853,
+                "diagonal": 3.8428040868997
+              },
+              "5": {
+                "state": 4.820101527977649,
+                "pooled": 4.91923264671399,
+                "scalar": 4.87406850153354,
+                "diagonal": 4.871258916063787
+              }
+            }
+          },
+          {
+            "state": 1,
+            "train_trials": 26,
+            "test_trials": 9,
+            "ridge": 1e-05,
+            "zero_mse": 4.785214791500002,
+            "mse": {
+              "1": {
+                "state": 3.861302536816392,
+                "pooled": 3.8189101907717813,
+                "scalar": 3.843848497208233,
+                "diagonal": 3.843528201904002
+              },
+              "5": {
+                "state": 4.469625364643758,
+                "pooled": 4.620463890938414,
+                "scalar": 4.509782101951048,
+                "diagonal": 4.513826569340343
+              }
+            }
+          }
+        ],
+        "train_pairs": 26,
+        "test_pairs": 9
+      },
+      "status": "checked"
+    }
+  ]
+}

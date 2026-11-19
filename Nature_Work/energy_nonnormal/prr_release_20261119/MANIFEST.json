@@ -1,0 +1,415 @@
+{
+  "title": "The Stronger Route Can Be the Worse Readout: Flexible Routing under a Fluctuation Budget",
+  "tag": "prr-flexible-routing-2026-11-19",
+  "date": "2026-11-19",
+  "submitted_pdf_source": "Author-supplied PDFs from Downloads; preserved byte-for-byte.",
+  "source_note": "Public TeX title synchronized to the supplied PDFs; no scientific content changed.",
+  "exclusions": [
+    "signature image",
+    "cover letter",
+    "peer reviews and replies",
+    "private logs",
+    "third-party raw recordings/connectomes",
+    "credentials",
+    "Git metadata",
+    "prior drafts"
+  ],
+  "files": {
+    "README.md": {
+      "bytes": 5243,
+      "sha256": "7a4944555b28bf91e62a3b73967315490c6b41ff55883680006f60c22ff3ec18"
+    },
+    "analysis/energy_nonnormal/alm_multisession_results.json": {
+      "bytes": 34959,
+      "sha256": "e1bf984e5aaad7e726c7c26bfcb2d9a89a1b90fa7cf476d03206f1627f06d198"
+    },
+    "analysis/energy_nonnormal/fig_general_spectrum.py": {
+      "bytes": 7305,
+      "sha256": "b84d5068e3818ce59a185fa20ad9e51c7bab8d05e41634c5d42b4866c9f42a8a"
+    },
+    "analysis/energy_nonnormal/figures/fig_flywire_gain_routing.pdf": {
+      "bytes": 23801,
+      "sha256": "e14688d082d7b9f21a1c64642e88c67b35327a7eb0951252e016e44a1764efcc"
+    },
+    "analysis/energy_nonnormal/figures/fig_flywire_gain_routing_sensitivity.pdf": {
+      "bytes": 27566,
+      "sha256": "74ad5332a387c599e4ac44de35027684aacbc5cd4ffad34eed2393654c386ca0"
+    },
+    "analysis/energy_nonnormal/figures/fig_general_spectrum.pdf": {
+      "bytes": 46687,
+      "sha256": "ac67f7e1bfe7a62eb83a5d82f2e061945a23bbb4e3d74f0e313e6fef38c74295"
+    },
+    "analysis/energy_nonnormal/fixed_budget_selection.py": {
+      "bytes": 21218,
+      "sha256": "0d3390c9defc447718a5966994ecedee2460f9d8753757abcd87978dcdf93598"
+    },
+    "analysis/energy_nonnormal/fixed_budget_selection_results.json": {
+      "bytes": 187010,
+      "sha256": "cb6b3a90b048077cc9ccde84d1914ccf73516bfacc0499a8337b37bd344b5112"
+    },
+    "analysis/energy_nonnormal/flywire_gain_routing.py": {
+      "bytes": 32981,
+      "sha256": "ff0db00278ab457fc51d5b34ae2306741603c6c039e3caa49a98f8bfa71a69be"
+    },
+    "analysis/energy_nonnormal/flywire_gain_routing_results.json": {
+      "bytes": 54243,
+      "sha256": "6810b522761bb161f5dd65fa0cf94d4416c639da5d521f230dcd0c2323e773b9"
+    },
+    "analysis/energy_nonnormal/flywire_gain_routing_sensitivity.json": {
+      "bytes": 8455,
+      "sha256": "65f2719fa350e82b38013f7bb3ae89e1a1f473051a69b44926052a104b4a445f"
+    },
+    "analysis/energy_nonnormal/flywire_gain_routing_sensitivity.py": {
+      "bytes": 11553,
+      "sha256": "527ca422feb230de698d1f142ecf89cbadc32f78c040cbbfa5bacca24126d2a2"
+    },
+    "analysis/energy_nonnormal/gain_routing.py": {
+      "bytes": 17154,
+      "sha256": "dd7e3bac49bc7a20a6a653caad24261a9acf7579e4c760915ef286ef989d83a8"
+    },
+    "analysis/energy_nonnormal/general_spectrum_results.json": {
+      "bytes": 185,
+      "sha256": "94b8cee5c632ba26ebc361f8e97681a5f89455a33adf4cb548e246d61f187d2e"
+    },
+    "analysis/energy_nonnormal/general_spectrum_selection.py": {
+      "bytes": 6310,
+      "sha256": "8c48f11ae43e1aae00f5ded07f846a547b788429cd4ead331991581edb37741b"
+    },
+    "analysis/energy_nonnormal/higher_order_frontier.py": {
+      "bytes": 9681,
+      "sha256": "203f4cc78657dcff926b8a953b3b5b4aae3ffe410b23b624368513ded5e14be9"
+    },
+    "analysis/energy_nonnormal/higher_order_frontier_results.json": {
+      "bytes": 139872,
+      "sha256": "04e6c260dca0e358110c11c4033df5c820ef31b1412f6b3068444bac69a6f7ab"
+    },
+    "analysis/energy_nonnormal/multisession_alm_validation.py": {
+      "bytes": 34466,
+      "sha256": "8d5bafa9aea07b0e1cf18742525261ef46baa3b98de267c3e5f9727e6f49a4ca"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/alm_normal_control.py": {
+      "bytes": 9127,
+      "sha256": "5ae1ec6e69f2a2d116450bcc353396fa6173d6058435744357cf8e71312b9db6"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/alm_normal_d12.json": {
+      "bytes": 113550,
+      "sha256": "0d8a9d71e02ac65e9d4b05063eb81daff63f7a3b21f2edf08279cfaf4a30c407"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/alm_normal_d16.json": {
+      "bytes": 113746,
+      "sha256": "c541d066c8b4f7e2bb18ce1479e0ff91027b064df08af450efb94eee69fe14c8"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/alm_normal_d8.json": {
+      "bytes": 113386,
+      "sha256": "5552a8be6ca2f28adc6f95912c62bba387ba51cb6a358dfe4680d8a679634dc8"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/draw_prr_figure_sequence.py": {
+      "bytes": 16725,
+      "sha256": "079b6df073a3baf55f0d1ab2e2c445b2355b788fde5142e75deeac286accfa65"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/finite_time_allocation.py": {
+      "bytes": 17571,
+      "sha256": "a9d62aaf437428a6ba074453b6c78f61ff5adaf75a4428622462389919f70cc1"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/finite_time_allocation_results.json": {
+      "bytes": 222623,
+      "sha256": "26996ce845e846e2d23d645d505f7b6130a3379f1fdbf64d6632b998138af8cf"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/flywire_cost_readout.py": {
+      "bytes": 5810,
+      "sha256": "eebc2c6e747d1323e0dae28222ccddc39908f430d4997273263ed87534aad346"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/flywire_cost_readout_results.json": {
+      "bytes": 2647,
+      "sha256": "d21bd13c1172510fde121ec63c9cf4b31512edc678989ee8489d2572f3ffe362"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/pair_target_results.json": {
+      "bytes": 74569,
+      "sha256": "b0d3978ac8afee448efb9f57df1d0a53464da7a63eeb3417ecd0f2417a81e4b6"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/plot_alm_comparison.py": {
+      "bytes": 1836,
+      "sha256": "c893c9e3d4d56a29519629e2f44bdb3a63e06d3c7ddafd156c9bc2d25aa08b6c"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/plot_cost_frontier.py": {
+      "bytes": 7027,
+      "sha256": "847c5ef7794c9a5a53a8aeb8ee94cbbe3253688e4b1eb4d9e95e7293535982e4"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/plot_routing_allocation.py": {
+      "bytes": 6237,
+      "sha256": "705119a639761ff593a8e5898a5cff7c6ce0e3888ad54f1a3479f2ea8f0bd7d4"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/readout_budget_results.json": {
+      "bytes": 13781,
+      "sha256": "ebb6f81e319ee9e57291f8bcad13f09eb1c7c4c32f0418a7d9718760e481b7b6"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/routing_allocation_presentation.json": {
+      "bytes": 25698,
+      "sha256": "84dcadb9d3aad6bad2464689c01ddd4d0ede5b54eb0e36d77d983cf582937edb"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/verify_readout_budget.py": {
+      "bytes": 4694,
+      "sha256": "90aa0bd11694b6d7e0c556f871f4d0f80afaf1c0f4d00a0a158e1d1fe40f57d1"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/window_crossover.py": {
+      "bytes": 13939,
+      "sha256": "20ec6925b713fc6d1ba583f9af98d901cda4d33187afa687ab8649b261deb8a6"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/window_crossover_results.json": {
+      "bytes": 216435,
+      "sha256": "df6813a74c5b731fc250b535562ee47e3833d2eb254e701c0f047f8c59fa7624"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/window_discrimination.py": {
+      "bytes": 7123,
+      "sha256": "1329ae51f6c6dd6886e7b96d2d2d9176b19ca0f777f0fafaca770c499d7eb511"
+    },
+    "analysis/energy_nonnormal/prr_revision_routing_polish/window_results.json": {
+      "bytes": 6639,
+      "sha256": "cdb3a1c62336e2b5d708c40d352c5a9d4bf13c8004561ea83263ca143387bf05"
+    },
+    "analysis/energy_nonnormal/references.bib": {
+      "bytes": 14865,
+      "sha256": "f3f692b119c326f5564704634eba794e52d1e75a853755ff8bc1c9e8234bc8aa"
+    },
+    "analysis/energy_nonnormal/validation/ALM_ANALYSIS_PROTOCOL.md": {
+      "bytes": 2763,
+      "sha256": "9b602e6b2115997548cf961c41ff671825ddb54ba4415099f299c2db553286dc"
+    },
+    "analysis/energy_nonnormal/validation/FLYWIRE_DATA_PROVENANCE.md": {
+      "bytes": 2330,
+      "sha256": "21db9910a839985744deb43866e185d2ef13b1ee3011c9c5ff379f28c0a706ae"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/INFERENCE_PLAN.md": {
+      "bytes": 5675,
+      "sha256": "3b1414f71a90ae008a2523a8966d53ae9cf617f073ec86d67f2eeb3f9aac3eec"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/PROTOCOL.md": {
+      "bytes": 5326,
+      "sha256": "803af617730b501c98389ebf86ae43a1d5839f4f67a0c9640954f2661cc57d73"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/README.md": {
+      "bytes": 3790,
+      "sha256": "a85fbce4df6f511e9f61d968acc970dc87b14eb240ba8db7ce25065f48db4b79"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/RESULTS_20261002.md": {
+      "bytes": 11642,
+      "sha256": "eaf4734973751d7f4dbad79b87457a334d227cbd0f1ee539a8009b5f4af89b96"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/analyze_session.py": {
+      "bytes": 9802,
+      "sha256": "dbabc3f860ad2613ce3a3e3c463d0a6a0e15b803f93e3c87a1733f14c392ee9e"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/download_allen.py": {
+      "bytes": 8986,
+      "sha256": "50b70e437306fe0e1cc6f7f8107000871da700c7b8a994f4eb55466998f50e45"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/outputs_20261002/cohort_summary.json": {
+      "bytes": 25875,
+      "sha256": "893f4d66d957d7e390ec3f83ac171d51fb87bb16f8cac46fc8231d482fb598f2"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/outputs_20261002/fig_allen_state_routing.pdf": {
+      "bytes": 32644,
+      "sha256": "5753446cd70b8df9314f32c508de582d93bb1ff462e39f7c4045c92b0513f9ae"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/outputs_20261002/mouse_level_results.csv": {
+      "bytes": 2261,
+      "sha256": "4f8cfa3377e78bae3cac125e138f0da4a9f7e821e031439307d23271d494b335"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/outputs_20261002/pupil_summary.json": {
+      "bytes": 33548,
+      "sha256": "bd04dc1042578d501fd7cd0c39b2d5f65f3dbd36bf9392d5b6243cbd247244e4"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/plot_state_evidence.py": {
+      "bytes": 5876,
+      "sha256": "751f49c8a441d11a896af5696b2eea4e2ae68603ee581680afce90d357398bc7"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/pupil_check.py": {
+      "bytes": 6419,
+      "sha256": "2a929d7f4d871a0be5d73596f32eef816f15c7eaadb9cb18be73510da5e03372"
+    },
+    "analysis/energy_nonnormal/validation/allen_routing/state_inference.py": {
+      "bytes": 21985,
+      "sha256": "c6bd938f5c1a8fb49a64c270d5db66699aea79bc6f6fe3def5b82ee77fba34a1"
+    },
+    "analysis/energy_nonnormal/validation/download_zenodo_record.py": {
+      "bytes": 3820,
+      "sha256": "264990dd7e82b8f509f60ffc3786db172865ddafeac693ca9d334de09495d721"
+    },
+    "analysis/energy_nonnormal/validation/prepare_flywire_v783_inputs.py": {
+      "bytes": 4636,
+      "sha256": "19f49f77a2c0e6340a91279395a07b0a01355b612af5c0a462ca0c87ef70ac33"
+    },
+    "manuscript/allocation_supp.tex": {
+      "bytes": 10778,
+      "sha256": "8d9b897f9f17dcd197f02106843e672f754c0b89491b0396b730d9b05ccd4cad"
+    },
+    "manuscript/author_figures/fig_prr3_fixed_state_polished.pdf": {
+      "bytes": 225649,
+      "sha256": "943276fd3429637f995e4551654550b9f647040492c08dec3b835399c8a84173"
+    },
+    "manuscript/author_figures/fig_prr4_allocation_polished.pdf": {
+      "bytes": 320135,
+      "sha256": "be745e30544db7aacad6512a6f12c0726857726926dc71919da1a0e0289049e3"
+    },
+    "manuscript/feedback_allocation.py": {
+      "bytes": 5685,
+      "sha256": "5f47992808e2cfcf4156b977f9ab3071875240e3a4a0447b38864df8b742b761"
+    },
+    "manuscript/feedback_allocation_results.json": {
+      "bytes": 626428,
+      "sha256": "82c0c310aa27b1bd1573a8aa96b06972ee0a5ab7387a36faed1f976c80079dbd"
+    },
+    "manuscript/figures/fig4_prediction_row.pdf": {
+      "bytes": 31765,
+      "sha256": "73b5d3865a3babbc4dc4466688c99b73b8ab8b3d257859c4adc66bbcac7cec95"
+    },
+    "manuscript/figures/fig_allen_state_routing.pdf": {
+      "bytes": 92322,
+      "sha256": "4324f1752b0cc21dce6bd98ca8f1e6f3ea3f6df60bd791286380a7e9103143c6"
+    },
+    "manuscript/figures/fig_alm_normal_comparison.pdf": {
+      "bytes": 15050,
+      "sha256": "3fa9bc4169d3ee150a1a53e4487c17814d274062d84ad3cbd5110836716abcc1"
+    },
+    "manuscript/figures/fig_flywire_gain_routing.pdf": {
+      "bytes": 32323,
+      "sha256": "379edc357f7ad375c152f44afb71302692dc2985c581d92505b282e79b0e42e9"
+    },
+    "manuscript/figures/fig_flywire_gain_routing_sensitivity.pdf": {
+      "bytes": 32282,
+      "sha256": "9cf28e57296481ef89e19eb693b8ac3cafa1cb67b7a5a5806318d8b18519306f"
+    },
+    "manuscript/figures/fig_general_spectrum.pdf": {
+      "bytes": 52939,
+      "sha256": "8b8560e86bd5fe8e81a783d635b27ecd9a2935ff0c18904b528ade48002273e9"
+    },
+    "manuscript/figures/fig_prr1_cost.pdf": {
+      "bytes": 262788,
+      "sha256": "a9228451f285a38d9491b7fc62fa6ab417c3875fc09e5a42f69410aad9781e0a"
+    },
+    "manuscript/figures/fig_prr2_routing_polished.pdf": {
+      "bytes": 245731,
+      "sha256": "e8223d432124ac3c725a822390ed3fda78d9d572e7f7a6642b213466e69e9732"
+    },
+    "manuscript/figures/fig_prr3_fixed_state_polished.pdf": {
+      "bytes": 225649,
+      "sha256": "943276fd3429637f995e4551654550b9f647040492c08dec3b835399c8a84173"
+    },
+    "manuscript/figures/fig_prr3_strengthened.pdf": {
+      "bytes": 310587,
+      "sha256": "1f49faad521db75ca0d3c7fa9b9f3cc11b120843fe758ca951e67f29948a04c1"
+    },
+    "manuscript/figures/fig_prr4_allocation_polished.pdf": {
+      "bytes": 320135,
+      "sha256": "be745e30544db7aacad6512a6f12c0726857726926dc71919da1a0e0289049e3"
+    },
+    "manuscript/figures/fig_prr4_strengthened.pdf": {
+      "bytes": 624266,
+      "sha256": "ac7ef86d738bfe3d05616763c43975a417fab0cb87f0f4cb6815698a2f165666"
+    },
+    "manuscript/figures/fig_prrS_allocation_checks.pdf": {
+      "bytes": 33922,
+      "sha256": "04cf93ede73fa27a7f9169034f77335be12fa7d71298c2d576e206d1acf5e387"
+    },
+    "manuscript/figures/fig_prrS_chain.pdf": {
+      "bytes": 15368,
+      "sha256": "62ed479925c6cd7501f5f9781a47c3e405b3a6568a070b9db6c284b5bf8d295d"
+    },
+    "manuscript/figures/fig_prrS_feedback.pdf": {
+      "bytes": 31680,
+      "sha256": "0ec8909efbaaca270b1da8a82187745f64ebf170f1740792db9e0596b5096256"
+    },
+    "manuscript/figures/fig_prrS_local_gain_loop.pdf": {
+      "bytes": 30973,
+      "sha256": "e1511c998bb56f4bac41d58b17049d7e09eef468c88bff7d58418cb91f1a6ae8"
+    },
+    "manuscript/figures/fig_prrS_strengthening.pdf": {
+      "bytes": 814298,
+      "sha256": "4c9d89e7b8f0c9ac57d5c29236a678da8b0122fc5314648c9ea994659c0ab621"
+    },
+    "manuscript/local_gain_loop.py": {
+      "bytes": 10982,
+      "sha256": "3622f0c6a6c1e46f4db2fe1a01e32e8b06111a2ea16ad6b7f7758bbc1019dcea"
+    },
+    "manuscript/local_gain_loop_figure.py": {
+      "bytes": 3779,
+      "sha256": "d1d1f316fd62c90a90f6a098d539b3cce98c27df42fb7f9c5a1828ffe943b2fd"
+    },
+    "manuscript/local_gain_loop_results.json": {
+      "bytes": 480890,
+      "sha256": "730a65a2b8253c1e3d0118a7d51d789f23030e1e3d70ad1a708b6380ebc94fe1"
+    },
+    "manuscript/local_gain_loop_supp.tex": {
+      "bytes": 11035,
+      "sha256": "fbb23f98ba663b5f30419f2242e2c697a04d1e79269dc95ff567a603f0116b19"
+    },
+    "manuscript/main.tex": {
+      "bytes": 60799,
+      "sha256": "06ba4c15188ec2be82fe655747998fc20fc6799f304cf9b12460a7e9578c02d7"
+    },
+    "manuscript/recurrent_feedback.py": {
+      "bytes": 5894,
+      "sha256": "0df8468faa5b3898c59ede96aae076b7bc2f17477c314679e65ed5da68435bfc"
+    },
+    "manuscript/recurrent_feedback_figure.py": {
+      "bytes": 3650,
+      "sha256": "03a3de36464271f2818ca2e2de5a0ae372d24c72e34c99ae869d35a4fa4b0e59"
+    },
+    "manuscript/recurrent_feedback_results.json": {
+      "bytes": 13706127,
+      "sha256": "b20c9bc1b90496de3ded94d7becafd63671162c94582dd4c9489f634f236bb76"
+    },
+    "manuscript/references.bib": {
+      "bytes": 14865,
+      "sha256": "f3f692b119c326f5564704634eba794e52d1e75a853755ff8bc1c9e8234bc8aa"
+    },
+    "manuscript/references_prr.bib": {
+      "bytes": 4229,
+      "sha256": "da355fe41449bbae8013f2cbd162aaf82aed0ce49b1c782359390d297c43bc34"
+    },
+    "manuscript/source_records/window_crossover_results.json": {
+      "bytes": 216435,
+      "sha256": "df6813a74c5b731fc250b535562ee47e3833d2eb254e701c0f047f8c59fa7624"
+    },
+    "manuscript/strengthening_analysis.py": {
+      "bytes": 13396,
+      "sha256": "8bfe3833fbcd42bcd66006dd66b596618eaa13920e3272feb426bd2ef004e28a"
+    },
+    "manuscript/strengthening_figures.py": {
+      "bytes": 10419,
+      "sha256": "8d67ff5817c28d7eae30dd2109d6a04819d231bc824063a3959ef06ac6bf1ced"
+    },
+    "manuscript/strengthening_results.json": {
+      "bytes": 740339,
+      "sha256": "e962b8ca7c870158054494d9fd6ac746de423e8f832365a212896a19da3f5dfd"
+    },
+    "manuscript/strengthening_supp.tex": {
+      "bytes": 7850,
+      "sha256": "6fd4a8c70d96a86dbb79c1deb53859dc9dfc04197d2367f8bfcfb8cf1d16bd50"
+    },
+    "manuscript/supplemental.tex": {
+      "bytes": 56111,
+      "sha256": "87908776bf89528e16f5b665ebb1a19e3ff9da939e4b3cbe9bac024721151169"
+    },
+    "paper/main_submitted.pdf": {
+      "bytes": 1741234,
+      "sha256": "f6cbe6a2ef34590fc11d5ec4b3693799418cf5b1fd2bf4451ca30f8d7239a539"
+    },
+    "paper/supplement_submitted.pdf": {
+      "bytes": 1344202,
+      "sha256": "f2fe52bbcc1efc9be74433b3f0f5c4c6e24edcc1f8988f7ae0784fde9027457a"
+    },
+    "requirements.txt": {
+      "bytes": 198,
+      "sha256": "abda11c4345faff3ba4380b7e17883712e4fdddf226dade7a1e010c078fae6bd"
+    },
+    "verify_release.py": {
+      "bytes": 1374,
+      "sha256": "cd3e84ebd97f97fc314db9b0264c0d657526d7eda78d4c32d97c9dd54a9d1911"
+    },
+    "BUILD_VERIFICATION.json": {
+      "bytes": 18019,
+      "sha256": "4fba4e1f1dbe991c2aeaf10485e1b020dfcaf55da193b011a9abf7254d848418"
+    }
+  }
+}

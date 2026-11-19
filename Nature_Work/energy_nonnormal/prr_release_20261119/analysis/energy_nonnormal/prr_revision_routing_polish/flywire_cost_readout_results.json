@@ -1,0 +1,73 @@
+{
+  "source_graph_sha256": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347",
+  "source_node_sha256": "d144a7a4d5b25c13d452c23ad04bf90ccbbded2c03b492b8eb024d13ac6a987d",
+  "cost_steps_inclusive": [
+    0,
+    40
+  ],
+  "shared_trace_probes": 16,
+  "readout_steps_inclusive": [
+    1,
+    24
+  ],
+  "innovation_covariance": "identity",
+  "cue": "positive or negative unit-normalized input indicator",
+  "covariance_prehistory_steps": 120,
+  "states": {
+    "unmodulated": {
+      "cost_per_neuron": 1.978121744717405,
+      "routes": {
+        "feeding": {
+          "peak_squared_transfer": 3.496305112093978e-08,
+          "mean_squared_window_response": 1.0166555978318324e-08,
+          "dprime": 0.0003003729983767094,
+          "covariance_truncation_max_abs_diff": 1.4937495684819169e-12
+        },
+        "grooming": {
+          "peak_squared_transfer": 1.6424676232418278e-06,
+          "mean_squared_window_response": 3.019793366042149e-07,
+          "dprime": 0.001657141477539784,
+          "covariance_truncation_max_abs_diff": 1.5070722447774187e-12
+        }
+      }
+    },
+    "feeding": {
+      "cost_per_neuron": 1.97828657848292,
+      "routes": {
+        "feeding": {
+          "peak_squared_transfer": 7.682373279749299e-07,
+          "mean_squared_window_response": 2.449667811819411e-07,
+          "dprime": 0.0014722132670242922,
+          "covariance_truncation_max_abs_diff": 5.489431131877609e-11
+        },
+        "grooming": {
+          "peak_squared_transfer": 1.642491270104074e-06,
+          "mean_squared_window_response": 3.020568914199133e-07,
+          "dprime": 0.0016573532639430411,
+          "covariance_truncation_max_abs_diff": 1.5140666498325572e-12
+        }
+      },
+      "cost_change_vs_unmodulated_fraction": 8.332842301303007e-05,
+      "cost_change_paired_mc_se_fraction": 5.895068338772748e-06
+    },
+    "grooming": {
+      "cost_per_neuron": 1.9785946711039353,
+      "routes": {
+        "feeding": {
+          "peak_squared_transfer": 3.497733658264224e-08,
+          "mean_squared_window_response": 1.0170341293018887e-08,
+          "dprime": 0.00030042953322769416,
+          "covariance_truncation_max_abs_diff": 1.5898948824144554e-12
+        },
+        "grooming": {
+          "peak_squared_transfer": 4.887687282462139e-06,
+          "mean_squared_window_response": 8.389891414927106e-07,
+          "dprime": 0.0027338878701176255,
+          "covariance_truncation_max_abs_diff": 1.1352807582909463e-11
+        }
+      },
+      "cost_change_vs_unmodulated_fraction": 0.00023907850353156138,
+      "cost_change_paired_mc_se_fraction": 1.7023650276530705e-05
+    }
+  }
+}

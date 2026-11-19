@@ -1,0 +1,923 @@
+{
+  "source_sha256": "26996ce845e846e2d23d645d505f7b6130a3379f1fdbf64d6632b998138af8cf",
+  "duration": 3.0,
+  "reference_budget": 1.25712,
+  "reference_fixed_dprime": 0.9312953599806307,
+  "reference_optimal_dprime": 0.9748505219718352,
+  "reference_fixed_regret": 0.08302249266730699,
+  "reference_equal_regret": 0.014593628842967887,
+  "rows": [
+    {
+      "budget": 0.0,
+      "optimal_utility": 0.0,
+      "fixed_regret": 0.0,
+      "equal_regret": 0.0
+    },
+    {
+      "budget": 0.02,
+      "optimal_utility": 0.12967791263702586,
+      "fixed_regret": 0.09525681481808067,
+      "equal_regret": 0.04996228477600516
+    },
+    {
+      "budget": 0.04,
+      "optimal_utility": 0.21972708385750372,
+      "fixed_regret": 0.15252963736916608,
+      "equal_regret": 0.07334518015914321
+    },
+    {
+      "budget": 0.06,
+      "optimal_utility": 0.285905221461966,
+      "fixed_regret": 0.18745877434799368,
+      "equal_regret": 0.08271010118851371
+    },
+    {
+      "budget": 0.08,
+      "optimal_utility": 0.33659338132623756,
+      "fixed_regret": 0.20831897899585727,
+      "equal_regret": 0.08421681814058485
+    },
+    {
+      "budget": 0.1,
+      "optimal_utility": 0.3766602579002387,
+      "fixed_regret": 0.2198824422828379,
+      "equal_regret": 0.08114182845487211
+    },
+    {
+      "budget": 0.12,
+      "optimal_utility": 0.4091276567143938,
+      "fixed_regret": 0.2250831465107432,
+      "equal_regret": 0.0753354537110319
+    },
+    {
+      "budget": 0.14,
+      "optimal_utility": 0.43597038463349463,
+      "fixed_regret": 0.22581578824885412,
+      "equal_regret": 0.06789105663650302
+    },
+    {
+      "budget": 0.16,
+      "optimal_utility": 0.45853355904602583,
+      "fixed_regret": 0.22335224814695037,
+      "equal_regret": 0.05947755177913572
+    },
+    {
+      "budget": 0.18,
+      "optimal_utility": 0.47776505756415044,
+      "fixed_regret": 0.21857330970990435,
+      "equal_regret": 0.05051517960213919
+    },
+    {
+      "budget": 0.2,
+      "optimal_utility": 0.494806895542102,
+      "fixed_regret": 0.2125593981958474,
+      "equal_regret": 0.04172801895889322
+    },
+    {
+      "budget": 0.22,
+      "optimal_utility": 0.5111854241104469,
+      "fixed_regret": 0.20678021889885556,
+      "equal_regret": 0.03430692488212722
+    },
+    {
+      "budget": 0.24,
+      "optimal_utility": 0.5270048562412243,
+      "fixed_regret": 0.20128779110008,
+      "equal_regret": 0.028083547513285123
+    },
+    {
+      "budget": 0.26,
+      "optimal_utility": 0.542293339435833,
+      "fixed_regret": 0.19606208685219323,
+      "equal_regret": 0.02286219401228029
+    },
+    {
+      "budget": 0.28,
+      "optimal_utility": 0.5570771629460424,
+      "fixed_regret": 0.1910848545631782,
+      "equal_regret": 0.018483515810749807
+    },
+    {
+      "budget": 0.3,
+      "optimal_utility": 0.5713809086321882,
+      "fixed_regret": 0.18633942976306755,
+      "equal_regret": 0.014816757952571313
+    },
+    {
+      "budget": 0.32,
+      "optimal_utility": 0.5852275873596541,
+      "fixed_regret": 0.18181056924887268,
+      "equal_regret": 0.011753881986164672
+    },
+    {
+      "budget": 0.34,
+      "optimal_utility": 0.598638762525586,
+      "fixed_regret": 0.1774843053382894,
+      "equal_regret": 0.009205057535393135
+    },
+    {
+      "budget": 0.36,
+      "optimal_utility": 0.6116346621106328,
+      "fixed_regret": 0.17334781747127048,
+      "equal_regret": 0.007095167039836925
+    },
+    {
+      "budget": 0.38,
+      "optimal_utility": 0.6242342804803789,
+      "fixed_regret": 0.1693893188202653,
+      "equal_regret": 0.005361069626469206
+    },
+    {
+      "budget": 0.4,
+      "optimal_utility": 0.6364554710139984,
+      "fixed_regret": 0.16559795592093862,
+      "equal_regret": 0.0039494401225276254
+    },
+    {
+      "budget": 0.42,
+      "optimal_utility": 0.6483150305101281,
+      "fixed_regret": 0.16196371962838702,
+      "equal_regret": 0.0028150482912837616
+    },
+    {
+      "budget": 0.44,
+      "optimal_utility": 0.6598287762091469,
+      "fixed_regret": 0.15847736594957307,
+      "equal_regret": 0.0019193782187968411
+    },
+    {
+      "budget": 0.46,
+      "optimal_utility": 0.6710116161745827,
+      "fixed_regret": 0.15513034550929428,
+      "equal_regret": 0.0012295128365188424
+    },
+    {
+      "budget": 0.48,
+      "optimal_utility": 0.6818776136921867,
+      "fixed_regret": 0.151914740581226,
+      "equal_regret": 0.0007172267925571463
+    },
+    {
+      "budget": 0.5,
+      "optimal_utility": 0.6924400462716285,
+      "fixed_regret": 0.14882320876296307,
+      "equal_regret": 0.00035824428862019086
+    },
+    {
+      "budget": 0.52,
+      "optimal_utility": 0.7027114597713058,
+      "fixed_regret": 0.14584893249902176,
+      "equal_regret": 0.0001316284563834813
+    },
+    {
+      "budget": 0.54,
+      "optimal_utility": 0.7127037181101412,
+      "fixed_regret": 0.14298557376209864,
+      "equal_regret": 1.9276312713367716e-05
+    },
+    {
+      "budget": 0.56,
+      "optimal_utility": 0.7224280489805663,
+      "fixed_regret": 0.1402272332936958,
+      "equal_regret": 5.498980695683997e-06
+    },
+    {
+      "budget": 0.58,
+      "optimal_utility": 0.7318950859329576,
+      "fixed_regret": 0.13756841388271568,
+      "equal_regret": 7.667117068621554e-05
+    },
+    {
+      "budget": 0.6,
+      "optimal_utility": 0.7411149071631635,
+      "fixed_regret": 0.13500398722723073,
+      "equal_regret": 0.00022093722652072323
+    },
+    {
+      "budget": 0.62,
+      "optimal_utility": 0.7500970713006454,
+      "fixed_regret": 0.1325291639818862,
+      "equal_regret": 0.00042796360562247227
+    },
+    {
+      "budget": 0.64,
+      "optimal_utility": 0.7588506504642396,
+      "fixed_regret": 0.13013946664243847,
+      "equal_regret": 0.0006887296601044701
+    },
+    {
+      "budget": 0.66,
+      "optimal_utility": 0.7673842608260081,
+      "fixed_regret": 0.1278307049617874,
+      "equal_regret": 0.0009953501545670873
+    },
+    {
+      "budget": 0.68,
+      "optimal_utility": 0.7757060908995368,
+      "fixed_regret": 0.12559895362843454,
+      "equal_regret": 0.0013409241942688999
+    },
+    {
+      "budget": 0.7000000000000001,
+      "optimal_utility": 0.7838239277479441,
+      "fixed_regret": 0.12344053197036098,
+      "equal_regret": 0.001719406220796027
+    },
+    {
+      "budget": 0.72,
+      "optimal_utility": 0.7917451812878985,
+      "fixed_regret": 0.12135198547502835,
+      "equal_regret": 0.0021254955175142864
+    },
+    {
+      "budget": 0.74,
+      "optimal_utility": 0.7994769068491449,
+      "fixed_regret": 0.11933006894045362,
+      "equal_regret": 0.0025545412974612436
+    },
+    {
+      "budget": 0.76,
+      "optimal_utility": 0.8070258261338065,
+      "fixed_regret": 0.1173717310932556,
+      "equal_regret": 0.00300246095466139
+    },
+    {
+      "budget": 0.78,
+      "optimal_utility": 0.8143983467064351,
+      "fixed_regret": 0.11547410052821305,
+      "equal_regret": 0.003465669472174082
+    },
+    {
+      "budget": 0.8,
+      "optimal_utility": 0.8216005801335269,
+      "fixed_regret": 0.11363447283987083,
+      "equal_regret": 0.003941018315590461
+    },
+    {
+      "budget": 0.8200000000000001,
+      "optimal_utility": 0.8286383588804559,
+      "fixed_regret": 0.11185029883098851,
+      "equal_regret": 0.004425742415160472
+    },
+    {
+      "budget": 0.84,
+      "optimal_utility": 0.8355172520640091,
+      "fixed_regret": 0.11011917369507551,
+      "equal_regret": 0.0049174140650011244
+    },
+    {
+      "budget": 0.86,
+      "optimal_utility": 0.8422425801499362,
+      "fixed_regret": 0.10843882708122554,
+      "equal_regret": 0.0054139027535317075
+    },
+    {
+      "budget": 0.88,
+      "optimal_utility": 0.8488194286770361,
+      "fixed_regret": 0.1068071139591501,
+      "equal_regret": 0.0059133400929265445
+    },
+    {
+      "budget": 0.9,
+      "optimal_utility": 0.8552526610821835,
+      "fixed_regret": 0.10522200621087674,
+      "equal_regret": 0.006414089142952606
+    },
+    {
+      "budget": 0.92,
+      "optimal_utility": 0.8615469306942598,
+      "fixed_regret": 0.10368158488312473,
+      "equal_regret": 0.006914717530834169
+    },
+    {
+      "budget": 0.9400000000000001,
+      "optimal_utility": 0.8677066919591581,
+      "fixed_regret": 0.10218403304110746,
+      "equal_regret": 0.0074139738576561864
+    },
+    {
+      "budget": 0.96,
+      "optimal_utility": 0.8737362109527601,
+      "fixed_regret": 0.10072762917044786,
+      "equal_regret": 0.00791076695630355
+    },
+    {
+      "budget": 0.98,
+      "optimal_utility": 0.8796395752340281,
+      "fixed_regret": 0.09931074107919569,
+      "equal_regret": 0.008404147628610192
+    },
+    {
+      "budget": 1.0,
+      "optimal_utility": 0.8854207030860384,
+      "fixed_regret": 0.09793182025665237,
+      "equal_regret": 0.008893292542249132
+    },
+    {
+      "budget": 1.02,
+      "optimal_utility": 0.8910833521888533,
+      "fixed_regret": 0.09658939664990518,
+      "equal_regret": 0.009377490012600131
+    },
+    {
+      "budget": 1.04,
+      "optimal_utility": 0.8966311277645758,
+      "fixed_regret": 0.0952820738227268,
+      "equal_regret": 0.009856127432766648
+    },
+    {
+      "budget": 1.06,
+      "optimal_utility": 0.9020674902316861,
+      "fixed_regret": 0.09400852446485253,
+      "equal_regret": 0.010328680147150937
+    },
+    {
+      "budget": 1.08,
+      "optimal_utility": 0.9073957624028062,
+      "fixed_regret": 0.09276748622264519,
+      "equal_regret": 0.010794701591488876
+    },
+    {
+      "budget": 1.1,
+      "optimal_utility": 0.912619136257363,
+      "fixed_regret": 0.09155775782485831,
+      "equal_regret": 0.011253814545745366
+    },
+    {
+      "budget": 1.12,
+      "optimal_utility": 0.9177406793181282,
+      "fixed_regret": 0.09037819547958781,
+      "equal_regret": 0.011705703366348907
+    },
+    {
+      "budget": 1.1400000000000001,
+      "optimal_utility": 0.9227633406584471,
+      "fixed_regret": 0.08922770952074266,
+      "equal_regret": 0.012150107081592254
+    },
+    {
+      "budget": 1.16,
+      "optimal_utility": 0.9276899565648364,
+      "fixed_regret": 0.08810526128423524,
+      "equal_regret": 0.012586813248784523
+    },
+    {
+      "budget": 1.18,
+      "optimal_utility": 0.9325232558778027,
+      "fixed_regret": 0.08700986019588575,
+      "equal_regret": 0.013015652484598128
+    },
+    {
+      "budget": 1.2,
+      "optimal_utility": 0.9372658650320425,
+      "fixed_regret": 0.0859405610546562,
+      "equal_regret": 0.01343649359113197
+    },
+    {
+      "budget": 1.22,
+      "optimal_utility": 0.9419203128155423,
+      "fixed_regret": 0.08489646149617502,
+      "equal_regret": 0.013849239209708819
+    },
+    {
+      "budget": 1.24,
+      "optimal_utility": 0.9464890348657318,
+      "fixed_regret": 0.0838766996228888,
+      "equal_regret": 0.01425382194280067
+    },
+    {
+      "budget": 1.25712,
+      "optimal_utility": 0.9503335401887596,
+      "fixed_regret": 0.08302249266730699,
+      "equal_regret": 0.014593628842967887
+    },
+    {
+      "budget": 1.26,
+      "optimal_utility": 0.9509743779194668,
+      "fixed_regret": 0.08288045178829395,
+      "equal_regret": 0.014650200891628273
+    },
+    {
+      "budget": 1.28,
+      "optimal_utility": 0.9553786038324339,
+      "fixed_regret": 0.08190693052378462,
+      "equal_regret": 0.015038358563272292
+    },
+    {
+      "budget": 1.3,
+      "optimal_utility": 0.9597038933824329,
+      "fixed_regret": 0.08095538259759538,
+      "equal_regret": 0.015418298106592454
+    },
+    {
+      "budget": 1.32,
+      "optimal_utility": 0.9639523498699837,
+      "fixed_regret": 0.08002508719621193,
+      "equal_regret": 0.015790040841024866
+    },
+    {
+      "budget": 1.34,
+      "optimal_utility": 0.9681260025287386,
+      "fixed_regret": 0.07911535421938631,
+      "equal_regret": 0.016153624046487014
+    },
+    {
+      "budget": 1.36,
+      "optimal_utility": 0.9722268097573227,
+      "fixed_regret": 0.07822552268062977,
+      "equal_regret": 0.01650909898628239
+    },
+    {
+      "budget": 1.3800000000000001,
+      "optimal_utility": 0.9762566621834184,
+      "fixed_regret": 0.07735495920570867,
+      "equal_regret": 0.01685652913809277
+    },
+    {
+      "budget": 1.4000000000000001,
+      "optimal_utility": 0.9802173855701621,
+      "fixed_regret": 0.07650305662225898,
+      "equal_regret": 0.017195988610957835
+    },
+    {
+      "budget": 1.42,
+      "optimal_utility": 0.9841107435742331,
+      "fixed_regret": 0.07566923263417014,
+      "equal_regret": 0.017527560728607172
+    },
+    {
+      "budget": 1.44,
+      "optimal_utility": 0.9879384403644351,
+      "fixed_regret": 0.07485292857494852,
+      "equal_regret": 0.017851336761741665
+    },
+    {
+      "budget": 1.46,
+      "optimal_utility": 0.9917021231088259,
+      "fixed_regret": 0.07405360823455331,
+      "equal_regret": 0.01816741479362316
+    },
+    {
+      "budget": 1.48,
+      "optimal_utility": 0.99540338433818,
+      "fixed_regret": 0.07327075675489048,
+      "equal_regret": 0.018475898705295535
+    },
+    {
+      "budget": 1.5,
+      "optimal_utility": 0.9990437641927692,
+      "fixed_regret": 0.07250387958922788,
+      "equal_regret": 0.018776897267959614
+    },
+    {
+      "budget": 1.52,
+      "optimal_utility": 1.0026247525591958,
+      "fixed_regret": 0.0717525015213556,
+      "equal_regret": 0.019070523331568667
+    },
+    {
+      "budget": 1.54,
+      "optimal_utility": 1.0061477911034844,
+      "fixed_regret": 0.07101616574053704,
+      "equal_regret": 0.019356893099783723
+    },
+    {
+      "budget": 1.56,
+      "optimal_utility": 1.0096142752062645,
+      "fixed_regret": 0.07029443296861393,
+      "equal_regret": 0.019636125482497824
+    },
+    {
+      "budget": 1.58,
+      "optimal_utility": 1.013025555805498,
+      "fixed_regret": 0.06958688063588658,
+      "equal_regret": 0.019908341518054318
+    },
+    {
+      "budget": 1.6,
+      "optimal_utility": 1.0163829411518672,
+      "fixed_regret": 0.06889310210264721,
+      "equal_regret": 0.02017366385811925
+    },
+    {
+      "budget": 1.62,
+      "optimal_utility": 1.0196876984816168,
+      "fixed_regret": 0.06821270592346174,
+      "equal_regret": 0.020432216308887252
+    },
+    {
+      "budget": 1.6400000000000001,
+      "optimal_utility": 1.022941055611335,
+      "fixed_regret": 0.0675453151515022,
+      "equal_regret": 0.02068412342295245
+    },
+    {
+      "budget": 1.6600000000000001,
+      "optimal_utility": 1.0261442024589025,
+      "fixed_regret": 0.06689056668043447,
+      "equal_regret": 0.020929510136769913
+    },
+    {
+      "budget": 1.68,
+      "optimal_utility": 1.0292982924945555,
+      "fixed_regret": 0.06624811062152325,
+      "equal_regret": 0.02116850144912963
+    },
+    {
+      "budget": 1.7,
+      "optimal_utility": 1.0324044441257882,
+      "fixed_regret": 0.06561760971380082,
+      "equal_regret": 0.021401222136550047
+    },
+    {
+      "budget": 1.72,
+      "optimal_utility": 1.035463742019585,
+      "fixed_regret": 0.06499873876527695,
+      "equal_regret": 0.021627796501898278
+    },
+    {
+      "budget": 1.74,
+      "optimal_utility": 1.038477238365263,
+      "fixed_regret": 0.0643911841233149,
+      "equal_regret": 0.021848348152909036
+    },
+    {
+      "budget": 1.76,
+      "optimal_utility": 1.0414459540810221,
+      "fixed_regret": 0.063794643172429,
+      "equal_regret": 0.022062999807633155
+    },
+    {
+      "budget": 1.78,
+      "optimal_utility": 1.0443708799671003,
+      "fixed_regret": 0.06320882385786708,
+      "equal_regret": 0.022271873124103836
+    },
+    {
+      "budget": 1.8,
+      "optimal_utility": 1.0472529778082729,
+      "fixed_regret": 0.06263344423345996,
+      "equal_regret": 0.0224750885518068
+    },
+    {
+      "budget": 1.82,
+      "optimal_utility": 1.0500931814282777,
+      "fixed_regret": 0.062068232032317594,
+      "equal_regret": 0.022672765202769174
+    },
+    {
+      "budget": 1.84,
+      "optimal_utility": 1.0528923976985873,
+      "fixed_regret": 0.06151292425904509,
+      "equal_regret": 0.022865020740287623
+    },
+    {
+      "budget": 1.86,
+      "optimal_utility": 1.055651507503823,
+      "fixed_regret": 0.06096726680223741,
+      "equal_regret": 0.0230519712835231
+    },
+    {
+      "budget": 1.8800000000000001,
+      "optimal_utility": 1.0583713666659658,
+      "fixed_regret": 0.06043101406609552,
+      "equal_regret": 0.023233731326355755
+    },
+    {
+      "budget": 1.9000000000000001,
+      "optimal_utility": 1.0610528068294005,
+      "fixed_regret": 0.059903928620074876,
+      "equal_regret": 0.023410413669043617
+    },
+    {
+      "budget": 1.92,
+      "optimal_utility": 1.063696636308738,
+      "fixed_regret": 0.05938578086557511,
+      "equal_regret": 0.02358212936140358
+    },
+    {
+      "budget": 1.94,
+      "optimal_utility": 1.066303640901162,
+      "fixed_regret": 0.058876348718650995,
+      "equal_regret": 0.023748987656260878
+    },
+    {
+      "budget": 1.96,
+      "optimal_utility": 1.0688745846651277,
+      "fixed_regret": 0.05837541730796536,
+      "equal_regret": 0.023911095972208418
+    },
+    {
+      "budget": 1.98,
+      "optimal_utility": 1.071410210666925,
+      "fixed_regret": 0.057882778687040615,
+      "equal_regret": 0.02406855986460754
+    },
+    {
+      "budget": 2.0,
+      "optimal_utility": 1.0739112416967012,
+      "fixed_regret": 0.05739823156009005,
+      "equal_regret": 0.024221483004013944
+    },
+    {
+      "budget": 2.02,
+      "optimal_utility": 1.076378380955377,
+      "fixed_regret": 0.056921581020674905,
+      "equal_regret": 0.024369967161228523
+    },
+    {
+      "budget": 2.04,
+      "optimal_utility": 1.0788123127137952,
+      "fixed_regret": 0.05645263830246683,
+      "equal_regret": 0.024514112198223303
+    },
+    {
+      "budget": 2.06,
+      "optimal_utility": 1.0812137029455038,
+      "fixed_regret": 0.05599122054157313,
+      "equal_regret": 0.024654016064406648
+    },
+    {
+      "budget": 2.08,
+      "optimal_utility": 1.0835831999342362,
+      "fixed_regret": 0.05553715054964625,
+      "equal_regret": 0.024789774797473463
+    },
+    {
+      "budget": 2.1,
+      "optimal_utility": 1.0859214348573965,
+      "fixed_regret": 0.055090256597349896,
+      "equal_regret": 0.024921482528458272
+    },
+    {
+      "budget": 2.12,
+      "optimal_utility": 1.0882290223466196,
+      "fixed_regret": 0.05465037220760882,
+      "equal_regret": 0.025049231490483548
+    },
+    {
+      "budget": 2.14,
+      "optimal_utility": 1.0905065610263802,
+      "fixed_regret": 0.0542173359580671,
+      "equal_regret": 0.025173112030696387
+    },
+    {
+      "budget": 2.16,
+      "optimal_utility": 1.0927546340317378,
+      "fixed_regret": 0.05379099129236731,
+      "equal_regret": 0.025293212625102868
+    },
+    {
+      "budget": 2.18,
+      "optimal_utility": 1.0949738095061006,
+      "fixed_regret": 0.05337118633974902,
+      "equal_regret": 0.02540961989589019
+    },
+    {
+      "budget": 2.2,
+      "optimal_utility": 1.0971646410799183,
+      "fixed_regret": 0.052957773742558834,
+      "equal_regret": 0.025522418630934407
+    },
+    {
+      "budget": 2.22,
+      "optimal_utility": 1.0993276683311515,
+      "fixed_regret": 0.05255061049127052,
+      "equal_regret": 0.02563169180521041
+    },
+    {
+      "budget": 2.24,
+      "optimal_utility": 1.1014634172283162,
+      "fixed_regret": 0.052149557766636656,
+      "equal_regret": 0.025737520603833497
+    },
+    {
+      "budget": 2.2600000000000002,
+      "optimal_utility": 1.1035724005568748,
+      "fixed_regret": 0.051754480788622326,
+      "equal_regret": 0.025839984446514697
+    },
+    {
+      "budget": 2.2800000000000002,
+      "optimal_utility": 1.1056551183296945,
+      "fixed_regret": 0.051365248671780606,
+      "equal_regret": 0.025939161013204926
+    },
+    {
+      "budget": 2.3000000000000003,
+      "optimal_utility": 1.1077120581822655,
+      "fixed_regret": 0.050981734286753344,
+      "equal_regret": 0.026035126270745446
+    },
+    {
+      "budget": 2.32,
+      "optimal_utility": 1.1097436957533338,
+      "fixed_regret": 0.05060381412760351,
+      "equal_regret": 0.02612795450035299
+    },
+    {
+      "budget": 2.34,
+      "optimal_utility": 1.111750495051574,
+      "fixed_regret": 0.050231368184687986,
+      "equal_regret": 0.026217718325783013
+    },
+    {
+      "budget": 2.36,
+      "optimal_utility": 1.1137329088088954,
+      "fixed_regret": 0.04986427982281372,
+      "equal_regret": 0.026304488742034726
+    },
+    {
+      "budget": 2.38,
+      "optimal_utility": 1.1156913788209473,
+      "fixed_regret": 0.049502435664418476,
+      "equal_regret": 0.026388335144477137
+    },
+    {
+      "budget": 2.4,
+      "optimal_utility": 1.1176263362753502,
+      "fixed_regret": 0.04914572547752827,
+      "equal_regret": 0.02646932535826707
+    },
+    {
+      "budget": 2.42,
+      "optimal_utility": 1.1195382020682052,
+      "fixed_regret": 0.048794042068307064,
+      "equal_regret": 0.026547525668007
+    },
+    {
+      "budget": 2.44,
+      "optimal_utility": 1.121427387109297,
+      "fixed_regret": 0.04844728117790975,
+      "equal_regret": 0.026623000847475042
+    },
+    {
+      "budget": 2.46,
+      "optimal_utility": 1.1232942926165301,
+      "fixed_regret": 0.04810534138351197,
+      "equal_regret": 0.02669581418942535
+    },
+    {
+      "budget": 2.48,
+      "optimal_utility": 1.1251393104000003,
+      "fixed_regret": 0.04776812400328301,
+      "equal_regret": 0.026766027535346293
+    },
+    {
+      "budget": 2.5,
+      "optimal_utility": 1.1269628231361288,
+      "fixed_regret": 0.047435533005126596,
+      "equal_regret": 0.026833701305119417
+    },
+    {
+      "budget": 2.52,
+      "optimal_utility": 1.128765204632272,
+      "fixed_regret": 0.04710747491902345,
+      "equal_regret": 0.026898894526529604
+    },
+    {
+      "budget": 2.54,
+      "optimal_utility": 1.130546820082181,
+      "fixed_regret": 0.04678385875280644,
+      "equal_regret": 0.026961664864572965
+    },
+    {
+      "budget": 2.56,
+      "optimal_utility": 1.1323080263126843,
+      "fixed_regret": 0.04646459591121621,
+      "equal_regret": 0.027022068650519593
+    },
+    {
+      "budget": 2.58,
+      "optimal_utility": 1.1340491720219403,
+      "fixed_regret": 0.04614960011808922,
+      "equal_regret": 0.027080160910694095
+    },
+    {
+      "budget": 2.6,
+      "optimal_utility": 1.1357705980095953,
+      "fixed_regret": 0.045838787341539566,
+      "equal_regret": 0.027135995394940604
+    },
+    {
+      "budget": 2.62,
+      "optimal_utility": 1.1374726373991637,
+      "fixed_regret": 0.04553207572199547,
+      "equal_regret": 0.027189624604738727
+    },
+    {
+      "budget": 2.64,
+      "optimal_utility": 1.13915561585294,
+      "fixed_regret": 0.045229385502977504,
+      "equal_regret": 0.027241099820955128
+    },
+    {
+      "budget": 2.66,
+      "optimal_utility": 1.1408198517797268,
+      "fixed_regret": 0.04493063896448435,
+      "equal_regret": 0.02729047113119698
+    },
+    {
+      "budget": 2.68,
+      "optimal_utility": 1.1424656565356655,
+      "fixed_regret": 0.04463576035888228,
+      "equal_regret": 0.02733778745676041
+    },
+    {
+      "budget": 2.7,
+      "optimal_utility": 1.1440933346184268,
+      "fixed_regret": 0.044344675849184556,
+      "equal_regret": 0.027383096579150612
+    },
+    {
+      "budget": 2.72,
+      "optimal_utility": 1.1457031838550238,
+      "fixed_regret": 0.04405731344962205,
+      "equal_regret": 0.027426445166165436
+    },
+    {
+      "budget": 2.74,
+      "optimal_utility": 1.1472954955834844,
+      "fixed_regret": 0.04377360296840327,
+      "equal_regret": 0.02746787879753021
+    },
+    {
+      "budget": 2.7600000000000002,
+      "optimal_utility": 1.1488705548286204,
+      "fixed_regret": 0.04349347595257269,
+      "equal_regret": 0.027507441990076043
+    },
+    {
+      "budget": 2.7800000000000002,
+      "optimal_utility": 1.1504286404721116,
+      "fixed_regret": 0.04321686563487903,
+      "equal_regret": 0.027545178222453837
+    },
+    {
+      "budget": 2.8000000000000003,
+      "optimal_utility": 1.1519700254171241,
+      "fixed_regret": 0.04294370688256799,
+      "equal_regret": 0.02758112995938422
+    },
+    {
+      "budget": 2.82,
+      "optimal_utility": 1.1534949767476603,
+      "fixed_regret": 0.04267393614801818,
+      "equal_regret": 0.027615338675434753
+    },
+    {
+      "budget": 2.84,
+      "optimal_utility": 1.1550037558828408,
+      "fixed_regret": 0.04240749142114675,
+      "equal_regret": 0.027647844878324834
+    },
+    {
+      "budget": 2.86,
+      "optimal_utility": 1.1564966187263028,
+      "fixed_regret": 0.04214431218350878,
+      "equal_regret": 0.027678688131760776
+    },
+    {
+      "budget": 2.88,
+      "optimal_utility": 1.1579738158108956,
+      "fixed_regret": 0.04188433936402025,
+      "equal_regret": 0.02770790707779569
+    },
+    {
+      "budget": 2.9,
+      "optimal_utility": 1.1594355924388458,
+      "fixed_regret": 0.041627515296242645,
+      "equal_regret": 0.027735539458724867
+    },
+    {
+      "budget": 2.92,
+      "optimal_utility": 1.1608821888175527,
+      "fixed_regret": 0.041373783677159715,
+      "equal_regret": 0.02776162213850708
+    },
+    {
+      "budget": 2.94,
+      "optimal_utility": 1.1623138401911786,
+      "fixed_regret": 0.04112308952739174,
+      "equal_regret": 0.02778619112372871
+    },
+    {
+      "budget": 2.96,
+      "optimal_utility": 1.1637307769681793,
+      "fixed_regret": 0.040875379152785385,
+      "equal_regret": 0.02780928158410223
+    },
+    {
+      "budget": 2.98,
+      "optimal_utility": 1.1651332248449227,
+      "fixed_regret": 0.040630600107325776,
+      "equal_regret": 0.02783092787251551
+    },
+    {
+      "budget": 3.0,
+      "optimal_utility": 1.1665214049255352,
+      "fixed_regret": 0.04038870115731985,
+      "equal_regret": 0.027851163544625024
+    }
+  ]
+}

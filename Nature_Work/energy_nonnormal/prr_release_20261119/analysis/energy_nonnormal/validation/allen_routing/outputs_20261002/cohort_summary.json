@@ -1,0 +1,1158 @@
+{
+  "sessions_analyzed": 22,
+  "distinct_mice": 22,
+  "null_per_session": [
+    999
+  ],
+  "scope": "Associational effective residual geometry; not causal routing, matched spectra/costs, or budget optimization",
+  "original": {
+    "pooled": {
+      "n": 22,
+      "positive": 21,
+      "median": 0.006961783593337155,
+      "median_bootstrap_CI95": [
+        0.0043077806027189735,
+        0.009053924773138343
+      ],
+      "wilcoxon_two_sided": 2.6226043701171875e-05
+    },
+    "scalar": {
+      "n": 22,
+      "positive": 20,
+      "median": 0.005890501024628413,
+      "median_bootstrap_CI95": [
+        0.005169949959663686,
+        0.009488249091236165
+      ],
+      "wilcoxon_two_sided": 4.76837158203125e-06
+    },
+    "diagonal": {
+      "n": 22,
+      "positive": 18,
+      "median": 0.0055546011635533975,
+      "median_bootstrap_CI95": [
+        0.002886844668374982,
+        0.008032862137512432
+      ],
+      "wilcoxon_two_sided": 0.00021314620971679688
+    }
+  },
+  "local_300s": {
+    "pooled": {
+      "n": 14,
+      "positive": 13,
+      "median": 0.007343595144623984,
+      "median_bootstrap_CI95": [
+        0.005226056107086211,
+        0.009019143258347472
+      ],
+      "wilcoxon_two_sided": 0.000244140625,
+      "group_permutation_p": 0.001,
+      "group_null_median": -0.001237997975700365,
+      "group_permutation_Holm_two_controls": 0.002
+    },
+    "scalar": {
+      "n": 14,
+      "positive": 13,
+      "median": 0.006011113402613007,
+      "median_bootstrap_CI95": [
+        0.004647969737187838,
+        0.00864921988171865
+      ],
+      "wilcoxon_two_sided": 0.000244140625,
+      "group_permutation_p": 0.001,
+      "group_null_median": -0.0025388940817230457,
+      "group_permutation_Holm_two_controls": 0.002
+    },
+    "diagonal": {
+      "n": 14,
+      "positive": 12,
+      "median": 0.005050893265415463,
+      "median_bootstrap_CI95": [
+        0.0035354266396716593,
+        0.006085793664582869
+      ],
+      "wilcoxon_two_sided": 0.0006103515625,
+      "group_permutation_p": 0.001,
+      "group_null_median": -0.0020902350699601216
+    },
+    "sessions": [
+      "session_715093703",
+      "session_721123822",
+      "session_732592105",
+      "session_744228101",
+      "session_746083955",
+      "session_750332458",
+      "session_750749662",
+      "session_754829445",
+      "session_756029989",
+      "session_757216464",
+      "session_761418226",
+      "session_762120172",
+      "session_791319847",
+      "session_798911424"
+    ]
+  },
+  "local_600s": {
+    "pooled": {
+      "n": 17,
+      "positive": 16,
+      "median": 0.006598205779567353,
+      "median_bootstrap_CI95": [
+        0.0029328460019687084,
+        0.01108829128606104
+      ],
+      "wilcoxon_two_sided": 0.0006561279296875
+    },
+    "scalar": {
+      "n": 17,
+      "positive": 16,
+      "median": 0.0067397827002350546,
+      "median_bootstrap_CI95": [
+        0.0030858642494155327,
+        0.01140624684745333
+      ],
+      "wilcoxon_two_sided": 0.0008392333984375
+    },
+    "diagonal": {
+      "n": 17,
+      "positive": 16,
+      "median": 0.005842483542681149,
+      "median_bootstrap_CI95": [
+        0.0037925027131242095,
+        0.01151602801685761
+      ],
+      "wilcoxon_two_sided": 0.001068115234375
+    }
+  },
+  "dimensions": {
+    "8": {
+      "pooled": {
+        "n": 14,
+        "positive": 13,
+        "median": 0.007871194502958818,
+        "median_bootstrap_CI95": [
+          0.004119020668825241,
+          0.010690555100721066
+        ],
+        "wilcoxon_two_sided": 0.0003662109375
+      },
+      "scalar": {
+        "n": 14,
+        "positive": 13,
+        "median": 0.006773909669706793,
+        "median_bootstrap_CI95": [
+          0.005002073150573334,
+          0.009831158809416984
+        ],
+        "wilcoxon_two_sided": 0.0003662109375
+      },
+      "diagonal": {
+        "n": 14,
+        "positive": 12,
+        "median": 0.0056778714952575434,
+        "median_bootstrap_CI95": [
+          0.0027410960306883236,
+          0.006337108054983888
+        ],
+        "wilcoxon_two_sided": 0.001220703125
+      }
+    },
+    "16": {
+      "pooled": {
+        "n": 14,
+        "positive": 14,
+        "median": 0.0062347284231223125,
+        "median_bootstrap_CI95": [
+          0.00350840856244115,
+          0.00689937886822351
+        ],
+        "wilcoxon_two_sided": 0.0001220703125
+      },
+      "scalar": {
+        "n": 14,
+        "positive": 14,
+        "median": 0.004670176634883096,
+        "median_bootstrap_CI95": [
+          0.0029196304971876768,
+          0.006407522283181793
+        ],
+        "wilcoxon_two_sided": 0.0001220703125
+      },
+      "diagonal": {
+        "n": 14,
+        "positive": 12,
+        "median": 0.003490478912911827,
+        "median_bootstrap_CI95": [
+          0.0028368432594200145,
+          0.005123606866886223
+        ],
+        "wilcoxon_two_sided": 0.0008544921875
+      }
+    }
+  },
+  "population_mean_removed": {
+    "pooled": {
+      "n": 14,
+      "positive": 14,
+      "median": 0.007308050441412937,
+      "median_bootstrap_CI95": [
+        0.005028415264904383,
+        0.010901184463421757
+      ],
+      "wilcoxon_two_sided": 0.0001220703125
+    },
+    "scalar": {
+      "n": 14,
+      "positive": 14,
+      "median": 0.009117506867013337,
+      "median_bootstrap_CI95": [
+        0.006375290147667304,
+        0.014780427294108639
+      ],
+      "wilcoxon_two_sided": 0.0001220703125
+    },
+    "diagonal": {
+      "n": 14,
+      "positive": 13,
+      "median": 0.0066647293747465934,
+      "median_bootstrap_CI95": [
+        0.0054514388832075465,
+        0.008855781619602971
+      ],
+      "wilcoxon_two_sided": 0.000244140625
+    }
+  },
+  "temporal_folds": {
+    "pooled": {
+      "n": 14,
+      "positive": 14,
+      "median": 0.008033664319983218,
+      "median_bootstrap_CI95": [
+        0.003921761937063281,
+        0.009136567763841003
+      ],
+      "wilcoxon_two_sided": 0.0001220703125
+    },
+    "scalar": {
+      "n": 14,
+      "positive": 14,
+      "median": 0.00562587544170659,
+      "median_bootstrap_CI95": [
+        0.0024559255392062403,
+        0.008761436902772014
+      ],
+      "wilcoxon_two_sided": 0.0001220703125
+    },
+    "diagonal": {
+      "n": 14,
+      "positive": 13,
+      "median": 0.004426014685762047,
+      "median_bootstrap_CI95": [
+        0.0023916031433369816,
+        0.006909738205008138
+      ],
+      "wilcoxon_two_sided": 0.0006103515625
+    }
+  },
+  "geometry": {
+    "normalized_map_distance": {
+      "n": 14,
+      "median": 1.0852142077306415,
+      "median_bootstrap_CI95": [
+        1.00941941829685,
+        1.2872747215524822
+      ],
+      "group_permutation_p": 0.001
+    },
+    "split_half_difference_cosine": {
+      "n": 4,
+      "positive": 3,
+      "median": 0.33027411745218016,
+      "median_bootstrap_CI95": [
+        -0.043908664471759944,
+        0.47968453224141394
+      ],
+      "wilcoxon_two_sided": 0.25,
+      "group_permutation_p": 0.012
+    },
+    "input_angle_deg": {
+      "n": 14,
+      "median": 61.842324248166754,
+      "median_bootstrap_CI95": [
+        54.793976311801515,
+        77.50197869519566
+      ]
+    },
+    "output_angle_deg": {
+      "n": 14,
+      "median": 65.17886620539363,
+      "median_bootstrap_CI95": [
+        60.602924174551916,
+        82.1767046764856
+      ]
+    }
+  },
+  "animal_FDR": {
+    "pooled": {
+      "session_715093703": {
+        "p": 0.065,
+        "q": 0.10111111111111111
+      },
+      "session_721123822": {
+        "p": 0.005,
+        "q": 0.014000000000000002
+      },
+      "session_732592105": {
+        "p": 0.001,
+        "q": 0.014
+      },
+      "session_744228101": {
+        "p": 0.22,
+        "q": 0.25666666666666665
+      },
+      "session_746083955": {
+        "p": 0.118,
+        "q": 0.15018181818181817
+      },
+      "session_750332458": {
+        "p": 0.37,
+        "q": 0.37
+      },
+      "session_750749662": {
+        "p": 0.013,
+        "q": 0.030333333333333334
+      },
+      "session_754829445": {
+        "p": 0.02,
+        "q": 0.035
+      },
+      "session_756029989": {
+        "p": 0.002,
+        "q": 0.014
+      },
+      "session_757216464": {
+        "p": 0.003,
+        "q": 0.014
+      },
+      "session_761418226": {
+        "p": 0.075,
+        "q": 0.10500000000000001
+      },
+      "session_762120172": {
+        "p": 0.004,
+        "q": 0.014
+      },
+      "session_791319847": {
+        "p": 0.019,
+        "q": 0.035
+      },
+      "session_798911424": {
+        "p": 0.33,
+        "q": 0.3553846153846154
+      }
+    },
+    "scalar": {
+      "session_715093703": {
+        "p": 0.02,
+        "q": 0.025454545454545455
+      },
+      "session_721123822": {
+        "p": 0.006,
+        "q": 0.009333333333333334
+      },
+      "session_732592105": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_744228101": {
+        "p": 0.002,
+        "q": 0.0035
+      },
+      "session_746083955": {
+        "p": 0.15,
+        "q": 0.16153846153846155
+      },
+      "session_750332458": {
+        "p": 0.25,
+        "q": 0.25
+      },
+      "session_750749662": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_754829445": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_756029989": {
+        "p": 0.002,
+        "q": 0.0035
+      },
+      "session_757216464": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_761418226": {
+        "p": 0.015,
+        "q": 0.020999999999999998
+      },
+      "session_762120172": {
+        "p": 0.002,
+        "q": 0.0035
+      },
+      "session_791319847": {
+        "p": 0.002,
+        "q": 0.0035
+      },
+      "session_798911424": {
+        "p": 0.099,
+        "q": 0.1155
+      }
+    },
+    "diagonal": {
+      "session_715093703": {
+        "p": 0.028,
+        "q": 0.0392
+      },
+      "session_721123822": {
+        "p": 0.017,
+        "q": 0.026444444444444448
+      },
+      "session_732592105": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_744228101": {
+        "p": 0.012,
+        "q": 0.021
+      },
+      "session_746083955": {
+        "p": 0.362,
+        "q": 0.362
+      },
+      "session_750332458": {
+        "p": 0.241,
+        "q": 0.2595384615384615
+      },
+      "session_750749662": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_754829445": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_756029989": {
+        "p": 0.004,
+        "q": 0.008
+      },
+      "session_757216464": {
+        "p": 0.001,
+        "q": 0.0035
+      },
+      "session_761418226": {
+        "p": 0.034,
+        "q": 0.043272727272727275
+      },
+      "session_762120172": {
+        "p": 0.002,
+        "q": 0.004666666666666667
+      },
+      "session_791319847": {
+        "p": 0.002,
+        "q": 0.004666666666666667
+      },
+      "session_798911424": {
+        "p": 0.138,
+        "q": 0.161
+      }
+    }
+  },
+  "cohort": [
+    {
+      "session": "session_715093703",
+      "mouse": 699733581,
+      "unit_count": 258,
+      "local_pairs": 50,
+      "local_eligible": true
+    },
+    {
+      "session": "session_719161530",
+      "mouse": 703279284,
+      "unit_count": 166,
+      "local_pairs": 17,
+      "local_eligible": false
+    },
+    {
+      "session": "session_721123822",
+      "mouse": 707296982,
+      "unit_count": 190,
+      "local_pairs": 102,
+      "local_eligible": true
+    },
+    {
+      "session": "session_732592105",
+      "mouse": 717038288,
+      "unit_count": 365,
+      "local_pairs": 63,
+      "local_eligible": true
+    },
+    {
+      "session": "session_737581020",
+      "mouse": 718643567,
+      "unit_count": 142,
+      "local_pairs": 4,
+      "local_eligible": false
+    },
+    {
+      "session": "session_744228101",
+      "mouse": 719817805,
+      "unit_count": 128,
+      "local_pairs": 70,
+      "local_eligible": true
+    },
+    {
+      "session": "session_746083955",
+      "mouse": 726170935,
+      "unit_count": 215,
+      "local_pairs": 59,
+      "local_eligible": true
+    },
+    {
+      "session": "session_750332458",
+      "mouse": 726141251,
+      "unit_count": 295,
+      "local_pairs": 24,
+      "local_eligible": true
+    },
+    {
+      "session": "session_750749662",
+      "mouse": 726162197,
+      "unit_count": 287,
+      "local_pairs": 42,
+      "local_eligible": true
+    },
+    {
+      "session": "session_754312389",
+      "mouse": 719828690,
+      "unit_count": 276,
+      "local_pairs": 18,
+      "local_eligible": false
+    },
+    {
+      "session": "session_754829445",
+      "mouse": 726298253,
+      "unit_count": 192,
+      "local_pairs": 64,
+      "local_eligible": true
+    },
+    {
+      "session": "session_755434585",
+      "mouse": 730760270,
+      "unit_count": 361,
+      "local_pairs": 6,
+      "local_eligible": false
+    },
+    {
+      "session": "session_756029989",
+      "mouse": 734865738,
+      "unit_count": 318,
+      "local_pairs": 88,
+      "local_eligible": true
+    },
+    {
+      "session": "session_757216464",
+      "mouse": 733457989,
+      "unit_count": 292,
+      "local_pairs": 58,
+      "local_eligible": true
+    },
+    {
+      "session": "session_758798717",
+      "mouse": 735109609,
+      "unit_count": 199,
+      "local_pairs": 8,
+      "local_eligible": false
+    },
+    {
+      "session": "session_760345702",
+      "mouse": 739783171,
+      "unit_count": 274,
+      "local_pairs": 0,
+      "local_eligible": false
+    },
+    {
+      "session": "session_760693773",
+      "mouse": 738651054,
+      "unit_count": 406,
+      "local_pairs": 10,
+      "local_eligible": false
+    },
+    {
+      "session": "session_761418226",
+      "mouse": 742714475,
+      "unit_count": 373,
+      "local_pairs": 35,
+      "local_eligible": true
+    },
+    {
+      "session": "session_762120172",
+      "mouse": 745276236,
+      "unit_count": 282,
+      "local_pairs": 77,
+      "local_eligible": true
+    },
+    {
+      "session": "session_763673393",
+      "mouse": 742602892,
+      "unit_count": 227,
+      "local_pairs": 3,
+      "local_eligible": false
+    },
+    {
+      "session": "session_791319847",
+      "mouse": 769360779,
+      "unit_count": 316,
+      "local_pairs": 85,
+      "local_eligible": true
+    },
+    {
+      "session": "session_798911424",
+      "mouse": 775876828,
+      "unit_count": 443,
+      "local_pairs": 52,
+      "local_eligible": true
+    }
+  ],
+  "original_feasibility_exclusions": [
+    {
+      "trials_before_matching": 594,
+      "counts": {
+        "0": 590,
+        "1": 4
+      },
+      "matched_condition_count": 0,
+      "eligible_counts": {},
+      "session": "session_739448407",
+      "units": 181,
+      "areas": {
+        "VISam": 56,
+        "VISl": 36,
+        "VISp": 19,
+        "VISrl": 70
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 584,
+      "counts": {
+        "0": 504,
+        "1": 80
+      },
+      "matched_condition_count": 2,
+      "eligible_counts": {
+        "0": 20,
+        "1": 10
+      },
+      "session": "session_742951821",
+      "units": 231,
+      "areas": {
+        "VISal": 44,
+        "VISl": 52,
+        "VISp": 33,
+        "VISpm": 23,
+        "VISrl": 79
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 425,
+      "counts": {
+        "0": 390,
+        "1": 35
+      },
+      "matched_condition_count": 0,
+      "eligible_counts": {},
+      "session": "session_743475441",
+      "units": 185,
+      "areas": {
+        "VISam": 53,
+        "VISl": 19,
+        "VISp": 45,
+        "VISrl": 68
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 600,
+      "counts": {
+        "0": 51,
+        "1": 549
+      },
+      "matched_condition_count": 0,
+      "eligible_counts": {},
+      "session": "session_751348571",
+      "units": 279,
+      "areas": {
+        "VISam": 71,
+        "VISl": 27,
+        "VISp": 49,
+        "VISpm": 37,
+        "VISrl": 95
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 600,
+      "counts": {
+        "0": 546,
+        "1": 54
+      },
+      "matched_condition_count": 1,
+      "eligible_counts": {
+        "0": 10,
+        "1": 5
+      },
+      "session": "session_757970808",
+      "units": 250,
+      "areas": {
+        "VISal": 54,
+        "VISam": 70,
+        "VISp": 80,
+        "VISrl": 46
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 600,
+      "counts": {
+        "0": 550,
+        "1": 50
+      },
+      "matched_condition_count": 0,
+      "eligible_counts": {},
+      "session": "session_759883607",
+      "units": 205,
+      "areas": {
+        "VISal": 44,
+        "VISam": 55,
+        "VISp": 58,
+        "VISpm": 48
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 600,
+      "counts": {
+        "0": 21,
+        "1": 579
+      },
+      "matched_condition_count": 0,
+      "eligible_counts": {},
+      "session": "session_762602078",
+      "units": 187,
+      "areas": {
+        "VISam": 52,
+        "VISp": 75,
+        "VISrl": 60
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_766640955",
+      "units": 244,
+      "areas": {
+        "VISal": 65,
+        "VISam": 56,
+        "VISl": 34,
+        "VISp": 52,
+        "VISrl": 37
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_767871931",
+      "units": 296,
+      "areas": {
+        "VISal": 46,
+        "VISam": 52,
+        "VISp": 101,
+        "VISpm": 64,
+        "VISrl": 33
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_768515987",
+      "units": 291,
+      "areas": {
+        "VISal": 61,
+        "VISam": 49,
+        "VISl": 59,
+        "VISp": 72,
+        "VISrl": 50
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_771160300",
+      "units": 338,
+      "areas": {
+        "VISal": 108,
+        "VISam": 87,
+        "VISp": 85,
+        "VISpm": 58
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_771990200",
+      "units": 182,
+      "areas": {
+        "VISal": 29,
+        "VISam": 43,
+        "VISp": 54,
+        "VISpm": 37,
+        "VISrl": 19
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 600,
+      "counts": {
+        "0": 580,
+        "1": 20
+      },
+      "matched_condition_count": 0,
+      "eligible_counts": {},
+      "session": "session_773418906",
+      "units": 259,
+      "areas": {
+        "VISal": 166,
+        "VISam": 17,
+        "VISp": 37,
+        "VISrl": 39
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_774875821",
+      "units": 279,
+      "areas": {
+        "VISal": 72,
+        "VISam": 45,
+        "VISl": 53,
+        "VISp": 69,
+        "VISrl": 40
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_778240327",
+      "units": 387,
+      "areas": {
+        "VISal": 82,
+        "VISam": 77,
+        "VISl": 62,
+        "VISp": 85,
+        "VISpm": 68,
+        "VISrl": 13
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_778998620",
+      "units": 364,
+      "areas": {
+        "VISal": 61,
+        "VISam": 58,
+        "VISl": 74,
+        "VISp": 75,
+        "VISpm": 45,
+        "VISrl": 51
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_779839471",
+      "units": 312,
+      "areas": {
+        "VISam": 72,
+        "VISp": 126,
+        "VISpm": 84,
+        "VISrl": 30
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_781842082",
+      "units": 355,
+      "areas": {
+        "VISal": 172,
+        "VISam": 58,
+        "VISp": 83,
+        "VISrl": 42
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_786091066",
+      "units": 432,
+      "areas": {
+        "VISal": 165,
+        "VISam": 73,
+        "VISp": 82,
+        "VISpm": 65,
+        "VISrl": 47
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_787025148",
+      "units": 199,
+      "areas": {
+        "VISal": 54,
+        "VISam": 66,
+        "VISp": 68,
+        "VISrl": 11
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_789848216",
+      "units": 125,
+      "areas": {
+        "VISal": 14,
+        "VISam": 30,
+        "VISl": 43,
+        "VISp": 14,
+        "VISrl": 24
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_793224716",
+      "units": 290,
+      "areas": {
+        "VISal": 171,
+        "VISp": 80,
+        "VISrl": 39
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_794812542",
+      "units": 524,
+      "areas": {
+        "VISal": 49,
+        "VISam": 113,
+        "VISl": 100,
+        "VISp": 108,
+        "VISpm": 65,
+        "VISrl": 89
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 572,
+      "counts": {
+        "0": 517,
+        "1": 55
+      },
+      "matched_condition_count": 1,
+      "eligible_counts": {
+        "0": 8,
+        "1": 5
+      },
+      "session": "session_797828357",
+      "units": 297,
+      "areas": {
+        "VISal": 24,
+        "VISam": 67,
+        "VISl": 58,
+        "VISp": 85,
+        "VISpm": 52,
+        "VISrl": 11
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "trials_before_matching": 600,
+      "counts": {
+        "0": 520,
+        "1": 80
+      },
+      "matched_condition_count": 1,
+      "eligible_counts": {
+        "0": 10,
+        "1": 5
+      },
+      "session": "session_799864342",
+      "units": 225,
+      "areas": {
+        "VISal": 52,
+        "VISam": 29,
+        "VISl": 40,
+        "VISp": 75,
+        "VISrl": 29
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_816200189",
+      "units": 253,
+      "areas": {
+        "VISam": 51,
+        "VISl": 65,
+        "VISp": 61,
+        "VISpm": 76
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_819186360",
+      "units": 272,
+      "areas": {
+        "VISam": 52,
+        "VISl": 72,
+        "VISpm": 41,
+        "VISrl": 107
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_819701982",
+      "units": 242,
+      "areas": {
+        "VISam": 78,
+        "VISl": 66,
+        "VISrl": 98
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_821695405",
+      "units": 255,
+      "areas": {
+        "VISal": 26,
+        "VISam": 64,
+        "VISl": 71,
+        "VISp": 35,
+        "VISpm": 59
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_829720705",
+      "units": 374,
+      "areas": {
+        "VISal": 89,
+        "VISam": 80,
+        "VISl": 78,
+        "VISp": 52,
+        "VISrl": 75
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_831882777",
+      "units": 411,
+      "areas": {
+        "VISal": 46,
+        "VISam": 63,
+        "VISl": 73,
+        "VISp": 65,
+        "VISpm": 72,
+        "VISrl": 92
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_835479236",
+      "units": 318,
+      "areas": {
+        "VISal": 76,
+        "VISl": 76,
+        "VISp": 79,
+        "VISrl": 87
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_839068429",
+      "units": 278,
+      "areas": {
+        "VISam": 42,
+        "VISl": 47,
+        "VISp": 85,
+        "VISpm": 60,
+        "VISrl": 44
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_839557629",
+      "units": 219,
+      "areas": {
+        "VISal": 42,
+        "VISam": 38,
+        "VISl": 48,
+        "VISp": 53,
+        "VISpm": 38
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_840012044",
+      "units": 275,
+      "areas": {
+        "VISam": 48,
+        "VISl": 45,
+        "VISp": 46,
+        "VISpm": 53,
+        "VISrl": 83
+      },
+      "status": "excluded_by_feasibility_gate"
+    },
+    {
+      "excluded": "no_drifting_gratings",
+      "session": "session_847657808",
+      "units": 346,
+      "areas": {
+        "VISal": 55,
+        "VISam": 65,
+        "VISl": 76,
+        "VISp": 50,
+        "VISpm": 55,
+        "VISrl": 45
+      },
+      "status": "excluded_by_feasibility_gate"
+    }
+  ]
+}

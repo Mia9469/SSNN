@@ -1,0 +1,10 @@
+# Python 3.10 or newer recommended. Exact tested versions are in BUILD_VERIFICATION.json.
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+numba>=0.58
+pypdf>=4
+h5py>=3.8
+pandas>=2
+pyarrow>=12
+requests>=2.28

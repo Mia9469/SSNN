@@ -1,0 +1,6 @@
+{
+  "cost_law_max_rel_dev_small_amp": 0.013363361816438046,
+  "onset_slope_rank_one": 0.5,
+  "onset_slope_triangle": 0.5773502691896257,
+  "rank_one_dominates_all_matched_cost": true
+}
